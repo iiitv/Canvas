@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import "../../scss/components/_navbar.scss";
+// import "../../scss/components/_navbar.scss";
+console.log("hell");
 class DarkNav extends Component {
   state = {
     link1: "Home",
@@ -8,27 +9,55 @@ class DarkNav extends Component {
     link4: "Share",
     backgroundColor: "",
   };
+  componentDidMount() {
+    const backgroundColor = this.props.styles.backgroundColor;
+    this.setState({ backgroundColor });
+  }
   handleInputChange = (e, label) => {
     const value = e.currentTarget.value;
     console.log(label);
     this.setState({ [label]: value });
   };
-  renderInput = (property) => {
-    return (
-      <input type="text" id={`${property}`} placeholder={`Enter ${property}`} />
-    );
+  dragStart = (e) => {
+    const target = e.target;
+    e.dataTransfer.setData("navbar_id", target.id);
+    setTimeout(() => {
+      target.style.display = "none";
+    }, 0);
   };
-  applyStyles = () => {
-    const properties = [`backgroundColor`];
+  dragover = (e) => {
+    const target = e.target;
+    // target.classList.remove("drag");
+    console.log(target);
+    e.stopPropagation();
+  };
+  getNavbarStyles = () => {
+    const element = this.props.styles;
+    const style = {};
+    const properties = [
+      "width",
+      "height",
+      "backgroundColor",
+      "top",
+      "left",
+      "borderRadius",
+      "position",
+    ];
     for (const property of properties) {
-      try {
-        const value = document.getElementById(`${property}`).value.trim();
-        this.setState({ [property]: value });
-      } catch (error) {
-        console.log(error);
-      }
+      style[property] = element[property];
     }
+    style.padding = "3% 4%";
+    return style;
   };
+  // renderInput = (property) => {
+  //   return (
+  //     <input
+  //       type="text"
+  //       id={`${property}`}
+  //       placeholder={`Enter ${propertygit}`}
+  //     />
+  //   );
+  // };
   getInputStyles = () => {
     const properties = ["backgroundColor"];
     const styles = {};
@@ -41,13 +70,15 @@ class DarkNav extends Component {
     const links = ["link1", "link2", "link3", "link4"];
     return (
       <React.Fragment>
-        <div className="options">
-          {this.renderInput("backgroundColor")}
-          <button onClick={this.applyStyles}>apply</button>
-        </div>
-        <div className="darknav" style={this.getInputStyles()} draggable={true}>
+        <div
+          style={this.getNavbarStyles()}
+          id={`${this.props.styles.id}`}
+          onDragStart={this.dragStart}
+          onDragOver={this.dragover}
+          draggable={true}
+        >
           {links.map((m) => (
-            <a href="#">
+            <a href="#" key={m}>
               <input
                 type="text"
                 value={this.state[m]}
