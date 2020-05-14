@@ -10,15 +10,18 @@ function Home() {
   const [aid, setaid] = useState();
   const [arr] = useState([]);
 
+  // testing for global access
+  window.anuj = "puri";
+  //  global acess successful
   const toggleModal = (x = 0, y = 0, w = 0, id) => {
     const modal = document.querySelector(".modal");
     if (id) {
       modal.classList.add("visible");
       modal.style.top = x + 5 + "px";
       modal.style.left = y + w + 185 + "px";
-      return; 
+      return;
     }
-    modal.classList.remove('visible')
+    modal.classList.remove("visible");
   };
 
   const btn = (col, rad, aid) => {
