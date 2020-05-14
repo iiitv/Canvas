@@ -14,7 +14,9 @@ class DarkNav extends Component {
     this.setState({ [label]: value });
   };
   renderInput = (property) => {
-    return <input type="text" id={`${property}`} />;
+    return (
+      <input type="text" id={`${property}`} placeholder={`Enter ${property}`} />
+    );
   };
   applyStyles = () => {
     const properties = [`backgroundColor`];
