@@ -9,6 +9,18 @@ function Home() {
   const [state, setstate] = useState(false);
   const [aid, setaid] = useState();
   const [arr] = useState([]);
+
+  const toggleModal = (x = 0, y = 0, w = 0, id) => {
+    const modal = document.querySelector(".modal");
+    if (id) {
+      modal.classList.add("visible");
+      modal.style.top = x + 5 + "px";
+      modal.style.left = y + w + 185 + "px";
+      return; 
+    }
+    modal.classList.remove('visible')
+  };
+
   const btn = (col, rad, aid) => {
     setColor(col);
     setRadius(rad);
@@ -17,7 +29,7 @@ function Home() {
   };
 
   function getPositions(ev) {
-    console.log("hey");
+    toggleModal();
     const element = {};
     if (state === true) {
       const _mouseY = ev.clientY;
@@ -69,22 +81,32 @@ function Home() {
           Blue Round Button
         </button>
       </aside>
+      <div className="modal" id="add-modal">
+        <div className="modal__content">
+          <ul>
+            <li>Edit</li>
+            <li>Remove</li>
+          </ul>
+        </div>
+      </div>
       <div
         id="moving"
         onDrop={drop}
         onDragOver={dragOver}
         onClick={getPositions}
       >
-        {arr.map((ele) => {
+        {arr.map((ele, index) => {
           if (ele.type === "button") {
             return (
               <CusButton
+                key={index}
                 width={ele.width}
                 color={ele.color}
                 top={ele.top}
                 left={ele.left}
                 radius={ele.radius}
                 aid={ele.aid}
+                toggle={toggleModal}
               />
             );
           }

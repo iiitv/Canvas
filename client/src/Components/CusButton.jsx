@@ -11,6 +11,9 @@ class CusButton extends Component {
   dragover = (e) => {
     e.stopPropagation();
   };
+  parsePx=(x)=>{
+    return parseInt(x.split("px")[0])
+  }
   render() {
     return (
       <button
@@ -23,6 +26,11 @@ class CusButton extends Component {
           left: this.props.left,
           top: this.props.top,
           borderRadius: this.props.radius,
+        }}
+        onContextMenu={(e) => {
+          console.log(e)
+          e.preventDefault();
+          this.props.toggle(this.parsePx(this.props.top),this.parsePx(this.props.left),this.parsePx(this.props.width),this.props.aid);
         }}
       >
         hello
