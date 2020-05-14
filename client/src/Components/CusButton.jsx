@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 
 class CusButton extends Component {
-
-  componentDidMount(){
-    
-  }
   dragStart = (e) => {
     const target = e.target;
     e.dataTransfer.setData("card_id", target.id);
@@ -15,9 +11,6 @@ class CusButton extends Component {
   dragover = (e) => {
     e.stopPropagation();
   };
-  parsePx=(x)=>{
-    return parseInt(x.split("px")[0])
-  }
   render() {
     return (
       <button
@@ -32,11 +25,11 @@ class CusButton extends Component {
           borderRadius: this.props.radius,
         }}
         onContextMenu={(e) => {
-          console.log(e)
+          // console.log(e);
           e.preventDefault();
-          this.props.toggle(this.parsePx(this.props.top),this.parsePx(this.props.left),this.parsePx(this.props.width),this.props.aid);
+          this.props.toggle(this.props.aid);
           // console window object for global access
-          console.log(window.anuj)
+          console.log(window.anuj);
         }}
       >
         hello

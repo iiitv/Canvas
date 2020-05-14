@@ -13,12 +13,19 @@ function Home() {
   // testing for global access
   window.anuj = "puri";
   //  global acess successful
-  const toggleModal = (x = 0, y = 0, w = 0, id) => {
+
+  const parsePx = (x) => {
+    console.log("merelie", parseInt(x.split("px")[0]));
+    return parseInt(x.split("px")[0]);
+  };
+  const toggleModal = (id) => {
     const modal = document.querySelector(".modal");
     if (id) {
+      const tid = document.getElementById(id);
       modal.classList.add("visible");
-      modal.style.top = x + 5 + "px";
-      modal.style.left = y + w + 185 + "px";
+      console.log(tid.style.top, tid.style.top.left);
+      modal.style.top = parsePx(tid.style.top) + 5 + "px";
+      modal.style.left = parsePx(tid.style.left) + 260 + "px";
       return;
     }
     modal.classList.remove("visible");
