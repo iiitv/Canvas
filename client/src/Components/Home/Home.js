@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import CusButton from "../CusButton";
-
 import "../../scss/main.scss";
 
 function Home() {
@@ -17,7 +16,6 @@ function Home() {
   };
 
   function getPositions(ev) {
-    console.log("hey");
     const element = {};
     if (state === true) {
       const _mouseY = ev.clientY;
@@ -25,6 +23,7 @@ function Home() {
       element.type = "button";
       element.width = "70px";
       element.color = color;
+      console.log(color);
       element.top = `${_mouseY}px`;
       element.left = `${_mouseX - 200}px`;
       element.radius = radius;
@@ -39,7 +38,6 @@ function Home() {
 
   const drop = (e) => {
     e.preventDefault();
-
     const _mouseY = e.clientY;
     const _mouseX = e.clientX;
     const card_id = e.dataTransfer.getData("card_id");
@@ -53,21 +51,20 @@ function Home() {
   const dragOver = (e) => {
     e.preventDefault();
   };
+  const renderLargeButton = (color, radius, id, label) => {
+    return (
+      <button onClick={() => btn(`${color}`, `${radius}`, `${id}`)}>
+        {label}
+      </button>
+    );
+  };
   return (
     <div className="Home">
       <aside>
-        <button onClick={btn.bind(null, "red", "0px", "btn1")}>
-          Red Button
-        </button>
-        <button onClick={btn.bind(null, "blue", "0px", "btn2")}>
-          Blue Button
-        </button>
-        <button onClick={btn.bind(null, "red", "1000px", "btn3")}>
-          Red Round Button
-        </button>
-        <button onClick={btn.bind(null, "blue", "1000px", "btn4")}>
-          Blue Round Button
-        </button>
+        {renderLargeButton("lightgrey", "0", "btn1", "Red Button")}
+        {renderLargeButton("orange", "0", "btn2", "Blue Button")}
+        {renderLargeButton("lightgrey", "25", "btn3", "Red Round Button")}
+        {renderLargeButton("orange", "25", "btn4", "Blue round Button")}
       </aside>
       <div
         id="moving"
