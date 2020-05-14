@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import "../../scss/components/_navbar.scss";
 class DarkNav extends Component {
   state = {
-    link1: "hello",
-    link2: "raghu",
-    link3: "dear",
-    link4: "turlo",
-    styles: {},
+    link1: "Home",
+    link2: "Design",
+    link3: "Contact us",
+    link4: "Share",
+    backgroundColor: "",
   };
   handleInputChange = (e, label) => {
     const value = e.currentTarget.value;
@@ -16,18 +16,23 @@ class DarkNav extends Component {
   renderInput = (property) => {
     return <input type="text" id={`${property}`} />;
   };
-  applyStyles = (e) => {
-    let styles = this.getStyleObject();
-    this.setState({ styles });
-    console.log(this.state.styles);
-  };
-  getStyleObject = () => {
-    let styles = this.state.styles;
-    const properties = ["backgroundColor"];
-    for (let m of properties) {
-      styles[m] = document.getElementById(`${m}`).value.trim();
+  applyStyles = () => {
+    const properties = [`backgroundColor`];
+    for (const property of properties) {
+      try {
+        const value = document.getElementById(`${property}`).value.trim();
+        this.setState({ [property]: value });
+      } catch (error) {
+        console.log(error);
+      }
     }
-    console.log(styles);
+  };
+  getInputStyles = () => {
+    const properties = ["backgroundColor"];
+    const styles = {};
+    for (const property of properties) {
+      styles[property] = `${this.state[property]}`;
+    }
     return styles;
   };
   render() {
@@ -36,14 +41,15 @@ class DarkNav extends Component {
       <React.Fragment>
         <div className="options">
           {this.renderInput("backgroundColor")}
-          <button onClick={(e) => this.applyStyles(e)}>apply</button>
+          <button onClick={this.applyStyles}>apply</button>
         </div>
-        <div className="darknav" style={this.state.styles} draggable={true}>
+        <div className="darknav" style={this.getInputStyles()} draggable={true}>
           {links.map((m) => (
             <a href="#">
               <input
                 type="text"
                 value={this.state[m]}
+                style={this.getInputStyles()}
                 onChange={(e) => this.handleInputChange(e, `${m}`)}
                 className="anchorInput"
               />
