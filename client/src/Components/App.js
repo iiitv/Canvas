@@ -5,7 +5,7 @@ import "../scss/main.scss";
 import NavBar from "./Home/NavBaar";
 class App extends Component {
   render() {
-    return <NavBar />;
+    return <Home />;
   }
 }
 export default App;

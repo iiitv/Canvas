@@ -20,7 +20,7 @@ class DarkNav extends Component {
   };
   dragStart = (e) => {
     const target = e.target;
-    e.dataTransfer.setData("navbar_id", target.id);
+    e.dataTransfer.setData("card_id", target.id);
     setTimeout(() => {
       target.style.display = "none";
     }, 0);
@@ -33,6 +33,9 @@ class DarkNav extends Component {
   };
   getNavbarStyles = () => {
     const element = this.props.styles;
+    console.log(element);
+    console.log("get " + element.height);
+
     const style = {};
     const properties = [
       "width",

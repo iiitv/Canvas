@@ -1,40 +1,57 @@
 import React, { useState } from "react";
 import CusButton from "../CusButton";
 import "../../scss/main.scss";
+import DarkNav from "./DarkNavBar";
 
 function Home() {
-  const [color, setColor] = useState();
-  const [radius, setRadius] = useState();
-  const [state, setstate] = useState(false);
+  const [backgroundColor, setbackgroundColor] = useState();
+  const [borderRadius, setborderRadius] = useState();
+  const [didClick, setdidClick] = useState(false);
+  const [type, settype] = useState("");
   const [aid, setaid] = useState();
   const [arr] = useState([]);
-  const btn = (col, rad, aid) => {
-    setColor(col);
-    setRadius(rad);
+  const setProperties = (col, rad, aid, type) => {
+    setbackgroundColor(col);
+    setborderRadius(rad);
     setaid(aid);
-    setstate(true);
+    settype(type);
+    setdidClick(true);
   };
 
   function getPositions(ev) {
-    const element = {};
-    if (state === true) {
+    let specificProperties = {};
+    let element = {};
+    if (didClick === true) {
       const _mouseY = ev.clientY;
       const _mouseX = ev.clientX;
-      element.type = "button";
-      element.width = "70px";
-      element.color = color;
-      console.log(color);
+      element.type = type;
+      element.borderRadius = borderRadius;
+      element.aid = aid;
+      element.backgroundColor = backgroundColor;
+      specificProperties = getSpecificProperties(type);
+      element = { ...element, ...specificProperties };
       element.top = `${_mouseY}px`;
       element.left = `${_mouseX - 200}px`;
-      element.radius = radius;
-      element.aid = aid;
-
-      setstate(false);
+      setdidClick(false);
     } else {
       return;
     }
     arr.push(element);
   }
+  const getSpecificProperties = (type) => {
+    const properties = {
+      button: {
+        width: "70px",
+      },
+      navbar: {
+        display: "flexbox",
+        position: "absolute",
+        width: "800px",
+        height: "150px",
+      },
+    };
+    return properties[type];
+  };
 
   const drop = (e) => {
     e.preventDefault();
@@ -51,20 +68,36 @@ function Home() {
   const dragOver = (e) => {
     e.preventDefault();
   };
-  const renderLargeButton = (color, radius, id, label) => {
+  const renderSidebarButton = (color, radius, id, label, type) => {
     return (
-      <button onClick={() => btn(`${color}`, `${radius}`, `${id}`)}>
+      <button
+        onClick={() =>
+          setProperties(`${color}`, `${radius}`, `${id}`, `${type}`)
+        }
+      >
         {label}
       </button>
     );
   };
   return (
     <div className="Home">
-      <aside>
-        {renderLargeButton("lightgrey", "0", "btn1", "Red Button")}
-        {renderLargeButton("orange", "0", "btn2", "Blue Button")}
-        {renderLargeButton("lightgrey", "25", "btn3", "Red Round Button")}
-        {renderLargeButton("orange", "25", "btn4", "Blue round Button")}
+      <aside className="sidebar">
+        <h1>Our Components</h1>
+        {renderSidebarButton(
+          "lightgrey",
+          "25px",
+          "btn3",
+          "Red Round Button",
+          "button"
+        )}
+        {renderSidebarButton(
+          "orange",
+          "25",
+          "btn4",
+          "Blue round Button",
+          "button"
+        )}
+        {renderSidebarButton("#d9455f", "18px", "nav1", "add navbar", "navbar")}
       </aside>
       <div
         id="moving"
@@ -72,18 +105,11 @@ function Home() {
         onDragOver={dragOver}
         onClick={getPositions}
       >
-        {arr.map((ele) => {
-          if (ele.type === "button") {
-            return (
-              <CusButton
-                width={ele.width}
-                color={ele.color}
-                top={ele.top}
-                left={ele.left}
-                radius={ele.radius}
-                aid={ele.aid}
-              />
-            );
+        {arr.map((element) => {
+          if (element.type === "button") {
+            return <CusButton styles={element} />;
+          } else {
+            return <DarkNav styles={element} />;
           }
         })}
       </div>

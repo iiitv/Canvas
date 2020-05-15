@@ -1,12 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap");
+
 .Home aside {
-  display: inline-flex;
+  // display: inline-flex;
   float: left;
   width: 200px;
   height: 650px;
-  border-right: 1px solid #000;
+  border-right: 1px dashed #000;
   flex-flow: column;
 }
-.Home aside button {
-  width: 150px;
-  margin: 10px auto;
+// .Home aside button {
+//   width: 150px;
+//   margin: 10px auto;
+// }
+
+.sidebar {
+  display: flexbox;
+  align-items: center;
+  background-color: #fbf4f9;
+  justify-items: auto;
+  font-family: "Didact Gothic", sans-serif;
+}
+.sidebar button {
+  background-color: #00bcd4;
+  margin: 15px;
+  height: 50px;
+  width: 170px;
+  color: #ffffff;
+  outline: none;
+  border: none;
+  font-size: 18px;
+  box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.6);
+  transition: 0.5s ease-in-out;
+  border-radius: 8px;
+}
+.sidebar button:hover {
+  cursor: pointer;
+  box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.2);
+}
+.sidebar h1 {
+  text-align: center;
+  color: #ffffff;
+  font-size: 26px;
 }

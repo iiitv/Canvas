@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class CusButton extends Component {
   state = {
-    value: "",
+    value: "Type here",
   };
   dragStart = (e) => {
     const target = e.target;
@@ -19,7 +19,6 @@ class CusButton extends Component {
     this.setState({ value });
   };
   dragover = (e) => {
-    const target = e.target;
     e.stopPropagation();
   };
   getInputStyles = (color, radius) => {
@@ -32,18 +31,16 @@ class CusButton extends Component {
     return styles;
   };
   getButtonStyles = () => {
-    const { color, left, top, radius } = this.props;
-
-    const styles = {
-      backgroundColor: color,
-      left: left,
-      top: top,
-      borderRadius: `${radius}px`,
-    };
-    return styles;
+    const { styles } = this.props;
+    const properties = ["backgroundColor", "left", "top", "borderRadius"];
+    const buttonStyles = {};
+    for (const property of properties) {
+      buttonStyles[property] = styles[property];
+    }
+    return buttonStyles;
   };
   render() {
-    const { aid, color, radius } = this.props;
+    const { aid, backgroundColor, borderRadius } = this.props.styles;
     return (
       <button
         className={aid}
@@ -55,7 +52,7 @@ class CusButton extends Component {
       >
         <input
           type="text"
-          style={this.getInputStyles(color, radius)}
+          style={this.getInputStyles(backgroundColor, borderRadius)}
           value={this.state.value}
           className="buttonInput"
           onChange={(e) => this.handleInputChange(e)}
