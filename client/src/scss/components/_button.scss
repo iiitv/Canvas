@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
 button,
 button:focus {
   outline: none;
@@ -5,4 +6,36 @@ button:focus {
 aside__button {
   width: 150px;
   margin: 10px auto;
+}
+
+.buttonInput {
+  width: 100%;
+  font-family: monospace;
+  font-size: 18px;
+  font-family: "Balsamiq Sans", cursive;
+  text-align: center;
+  cursor: pointer;
+  margin: none;
+  outline: none;
+  border: none;
+}
+
+.btn3,
+.btn1,
+.btn4,
+.btn2 {
+  outline: none;
+  border: none;
+  box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.5);
+  height: 50px;
+  transition: 0.5s;
+}
+.btn1:hover,
+.btn2:hover,
+.btn3:hover,
+.btn2:hover {
+  box-shadow: none;
+}
+.drag {
+  cursor: pointer;
 }
