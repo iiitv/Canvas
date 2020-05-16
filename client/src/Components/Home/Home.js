@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CusButton from "../CusButton";
 import "../../scss/main.scss";
 import DarkNav from "./DarkNavBar";
+import ContactUsForm from "./contactUs";
 
 function Home() {
   const [backgroundColor, setbackgroundColor] = useState();
@@ -79,6 +80,14 @@ function Home() {
       </button>
     );
   };
+  const getComponent = (type, element) => {
+    const components = {
+      button: <CusButton styles={element} />,
+      navbar: <DarkNav styles={element} />,
+      contactUs: <ContactUsForm styles={element} />,
+    };
+    return components[type];
+  };
   return (
     <div className="Home">
       <aside className="sidebar">
@@ -98,6 +107,13 @@ function Home() {
           "button"
         )}
         {renderSidebarButton("#d9455f", "18px", "nav1", "add navbar", "navbar")}
+        {renderSidebarButton(
+          "#d9455f",
+          "18px",
+          "contact",
+          "contact us",
+          "contactUs"
+        )}
       </aside>
       <div
         id="moving"
@@ -106,11 +122,7 @@ function Home() {
         onClick={getPositions}
       >
         {arr.map((element) => {
-          if (element.type === "button") {
-            return <CusButton styles={element} />;
-          } else {
-            return <DarkNav styles={element} />;
-          }
+          return getComponent(element.type, element);
         })}
       </div>
     </div>

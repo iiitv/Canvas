@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Handlee&family=Maven+Pro&display=swap");
+$fontfamily: "Maven Pro", sans-serif;
+$h1font: "Handlee", cursive;
+$form-background: #fff;
+* {
+  margin: none;
+  padding: none;
+  box-sizing: border-box;
+  font-family: $fontfamily;
+}
+.contact-us h1 {
+  font-size: 30px;
+  text-align: center;
+  font-family: $h1font;
+  margin-bottom: 15px;
+}
+.contact-us {
+  width: 400px;
+  position: absolute;
+  height: 600px;
+  box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.5);
+  padding: 50px;
+  background-color: $form-background;
+  border-radius: 30px;
+}
+.form,
+.form-items {
+  width: 100%;
+}
+.form .form-items input,
+.text-area {
+  margin-bottom: 10px;
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 3% 4%;
+  font-size: 20px;
+  background-color: #ebeef1;
+  border-radius: 30px;
+}
+.form-items .text-area {
+  padding: 20px;
+  resize: none;
+}
+.contact-us button {
+  color: #fff;
+  width: 200px;
+  padding: 12px;
+  font-size: 25px;
+  background-color: #827ffe;
+
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: 750ms;
+  font-family: $h1font;
+}
+.contact-us button:hover {
+  background-color: blue;
+}
