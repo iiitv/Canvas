@@ -7,7 +7,6 @@ class CusButton extends Component {
   dragStart = (e) => {
     const target = e.target;
     target.classList.add("drag");
-    console.log(target);
     e.dataTransfer.setData("card_id", target.id);
     setTimeout(() => {
       target.style.display = "none";
@@ -22,7 +21,6 @@ class CusButton extends Component {
     e.stopPropagation();
   };
   getInputStyles = (color, radius) => {
-    console.log("get Input styles" + color);
     const styles = {};
     styles.color = `white`;
     styles.display = "block";
@@ -49,6 +47,7 @@ class CusButton extends Component {
         onDragOver={this.dragover}
         id={aid}
         style={this.getButtonStyles()}
+        value="hwllo"
       >
         <input
           type="text"

@@ -50,6 +50,12 @@ function Home() {
         width: "800px",
         height: "150px",
       },
+      contactUs: {
+        position: "absolute",
+        width: "400px",
+        height: "600px",
+        padding: "50px",
+      },
     };
     return properties[type];
   };
@@ -59,12 +65,10 @@ function Home() {
     const _mouseY = e.clientY;
     const _mouseX = e.clientX;
     const card_id = e.dataTransfer.getData("card_id");
-    console.log(card_id);
     const card = document.getElementById(card_id);
     card.style.display = "block";
     card.style.top = `${_mouseY}px`;
     card.style.left = `${_mouseX - 200}px `;
-    console.log(card.style.top, card.style.top);
   };
   const dragOver = (e) => {
     e.preventDefault();
@@ -108,8 +112,8 @@ function Home() {
         )}
         {renderSidebarButton("#d9455f", "18px", "nav1", "add navbar", "navbar")}
         {renderSidebarButton(
-          "#d9455f",
-          "18px",
+          "#fff",
+          "30px",
           "contact",
           "contact us",
           "contactUs"

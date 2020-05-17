@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 class ContactUsForm extends Component {
-  state = {};
-
   renderFormInput = (placeholder) => {
     return (
       <div className="form-items">
@@ -16,11 +14,26 @@ class ContactUsForm extends Component {
   dragStart = (e) => {
     const target = e.target;
     target.classList.add("drag");
-    console.log(target);
     e.dataTransfer.setData("card_id", target.id);
     setTimeout(() => {
       target.style.display = "none";
     }, 0);
+  };
+  getStyles = () => {
+    const styles = this.props.styles;
+    const properties = [
+      "position",
+      "backgroundColor",
+      "borderRadius",
+      "height",
+      "padding",
+      "width",
+    ];
+    const element = {};
+    for (const property of properties) {
+      element[property] = styles[property];
+    }
+    return element;
   };
 
   renderFormTextArea = () => {
@@ -40,6 +53,7 @@ class ContactUsForm extends Component {
     return (
       <div
         className="contact-us"
+        style={this.getStyles()}
         draggable={true}
         onDragStart={this.dragStart}
         onDragOver={this.dragover}

@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-// import "../../scss/components/_navbar.scss";
-console.log("hell");
 class DarkNav extends Component {
   state = {
     link1: "Home",
@@ -15,7 +13,6 @@ class DarkNav extends Component {
   }
   handleInputChange = (e, label) => {
     const value = e.currentTarget.value;
-    console.log(label);
     this.setState({ [label]: value });
   };
   dragStart = (e) => {
@@ -27,15 +24,10 @@ class DarkNav extends Component {
   };
   dragover = (e) => {
     const target = e.target;
-    // target.classList.remove("drag");
-    console.log(target);
     e.stopPropagation();
   };
   getNavbarStyles = () => {
     const element = this.props.styles;
-    console.log(element);
-    console.log("get " + element.height);
-
     const style = {};
     const properties = [
       "width",
@@ -52,15 +44,6 @@ class DarkNav extends Component {
     style.padding = "3% 4%";
     return style;
   };
-  // renderInput = (property) => {
-  //   return (
-  //     <input
-  //       type="text"
-  //       id={`${property}`}
-  //       placeholder={`Enter ${propertygit}`}
-  //     />
-  //   );
-  // };
   getInputStyles = () => {
     const properties = ["backgroundColor"];
     const styles = {};

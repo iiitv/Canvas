@@ -37,26 +37,3 @@ a input:hover {
   transition: all 0.2s ease-in-out;
   transform: scale(1.3);
 }
-.options {
-  position: absolute;
-  width: 200px;
-  height: 100vh;
-  display: block;
-  background-color: gray;
-  margin: 0em;
-  margin: 10px 20px 0px 10px;
-}
-.ome {
-  width: 100px;
-  display: inline-block;
-  // display: flexbox;
-}
-// .ome .button {
-//   width: 70px;
-//   height: 80px;
-// }
-#dropspace {
-  width: 1350px;
-  margin-left: 130px;
-  height: 100vh;
-}
