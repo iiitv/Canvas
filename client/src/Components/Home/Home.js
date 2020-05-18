@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CusButton from "../CusButton";
 
 import "../../scss/main.scss";
+import Icons from "../Icons";
 
 function Home() {
   const [color, setColor] = useState();
@@ -68,6 +69,7 @@ function Home() {
         <button onClick={btn.bind(null, "blue", "1000px", "btn4")}>
           Blue Round Button
         </button>
+        <button><Icons></Icons></button>
       </aside>
       <div
         id="moving"
