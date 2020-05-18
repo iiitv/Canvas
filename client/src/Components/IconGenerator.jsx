@@ -33,28 +33,35 @@ export class IconGenerator extends Component {
       case "instagram":
         val = <FaInstagram />;
         break;
-        case "linkedin":
+      case "linkedin":
         val = <FaLinkedin />;
         break;
-        case "medium":
+      case "medium":
         val = <FaMedium />;
         break;
-        case "pintrest":
+      case "pintrest":
         val = <FaPinterest />;
         break;
-        case "quora":
+      case "quora":
         val = <FaQuora />;
         break;
-        case "twitter":
+      case "twitter":
         val = <FaTwitter />;
         break;
     }
     return (
-      <IconContext.Provider value={{ color:"blue", size: "5rem" }}>
-        <div>
-          {val}
-        </div>
+      <button style ={{
+        margin :"0",
+        padding : "0",
+        width: "5em",
+        height : "6em",
+        backgroundColor: "transparent",
+        borderColor : "transparent"
+    }}>
+      <IconContext.Provider value={{ color: "blue", size: "5rem" }}>
+        {val}
       </IconContext.Provider>
+      </button>
     );
   }
 }

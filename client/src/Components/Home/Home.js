@@ -16,7 +16,7 @@ function Home() {
     setaid(aid);
     setstate(true);
   };
-
+  const [showIcons , setIcons] = useState(false);
   function getPositions(ev) {
     console.log("hey");
     const element = {};
@@ -69,7 +69,8 @@ function Home() {
         <button onClick={btn.bind(null, "blue", "1000px", "btn4")}>
           Blue Round Button
         </button>
-        <button><Icons></Icons></button>
+        <button onClick = {()=>setIcons(!showIcons)}>Icons</button>
+        {showIcons&&<Icons />}
       </aside>
       <div
         id="moving"
