@@ -17,6 +17,11 @@ class CusButton extends Component {
     const value = currentTarget.value;
     this.setState({ value });
   };
+  handleContextMenu = (e) => {
+    e.preventDefault();
+    const { toggle, styles } = this.props;
+    toggle(styles.aid);
+  };
   dragover = (e) => {
     e.stopPropagation();
   };
@@ -47,7 +52,7 @@ class CusButton extends Component {
         onDragOver={this.dragover}
         id={aid}
         style={this.getButtonStyles()}
-        value="hwllo"
+        onContextMenu={this.handleContextMenu}
       >
         <input
           type="text"

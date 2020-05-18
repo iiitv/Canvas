@@ -35,7 +35,11 @@ class ContactUsForm extends Component {
     }
     return element;
   };
-
+  handleContextMenu = (e) => {
+    e.preventDefault();
+    const { toggle, styles } = this.props;
+    toggle(styles.aid);
+  };
   renderFormTextArea = () => {
     return (
       <div className="form-items">
@@ -52,6 +56,7 @@ class ContactUsForm extends Component {
   render() {
     return (
       <div
+        onContextMenu={this.handleContextMenu}
         className="contact-us"
         style={this.getStyles()}
         draggable={true}

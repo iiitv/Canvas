@@ -21,6 +21,7 @@ function Home() {
 
   function getPositions(ev) {
     let specificProperties = {};
+    toggleModal();
     let element = {};
     if (didClick === true) {
       const _mouseY = ev.clientY;
@@ -39,6 +40,21 @@ function Home() {
     }
     arr.push(element);
   }
+
+  const parsePx = (x) => {
+    return parseInt(x.split("px")[0]);
+  };
+  const toggleModal = (id) => {
+    const modal = document.querySelector(".modal");
+    if (id) {
+      const tid = document.getElementById(id);
+      modal.classList.add("visible");
+      modal.style.top = parsePx(tid.style.top) + 5 + "px";
+      modal.style.left = parsePx(tid.style.left) + 260 + "px";
+      return;
+    }
+    modal.classList.remove("visible");
+  };
   const getSpecificProperties = (type) => {
     const properties = {
       button: {
@@ -65,10 +81,12 @@ function Home() {
     const _mouseY = e.clientY;
     const _mouseX = e.clientX;
     const card_id = e.dataTransfer.getData("card_id");
-    const card = document.getElementById(card_id);
-    card.style.display = "block";
-    card.style.top = `${_mouseY}px`;
-    card.style.left = `${_mouseX - 200}px `;
+    if (card_id) {
+      const card = document.getElementById(card_id);
+      card.style.display = "block";
+      card.style.top = `${_mouseY}px`;
+      card.style.left = `${_mouseX - 200}px `;
+    }
   };
   const dragOver = (e) => {
     e.preventDefault();
@@ -84,11 +102,13 @@ function Home() {
       </button>
     );
   };
-  const getComponent = (type, element) => {
+  const getComponent = (type, element, index) => {
     const components = {
-      button: <CusButton styles={element} />,
-      navbar: <DarkNav styles={element} />,
-      contactUs: <ContactUsForm styles={element} />,
+      button: <CusButton key={index} styles={element} toggle={toggleModal} />,
+      navbar: <DarkNav key={index} styles={element} toggle={toggleModal} />,
+      contactUs: (
+        <ContactUsForm key={index} styles={element} toggle={toggleModal} />
+      ),
     };
     return components[type];
   };
@@ -119,14 +139,22 @@ function Home() {
           "contactUs"
         )}
       </aside>
+      <div className="modal" id="add-modal">
+        <div className="modal__content">
+          <ul>
+            <li>Edit</li>
+            <li>Remove</li>
+          </ul>
+        </div>
+      </div>
       <div
         id="moving"
         onDrop={drop}
         onDragOver={dragOver}
         onClick={getPositions}
       >
-        {arr.map((element) => {
-          return getComponent(element.type, element);
+        {arr.map((element, index) => {
+          return getComponent(element.type, element, index);
         })}
       </div>
     </div>

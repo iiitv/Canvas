@@ -17,13 +17,12 @@ class DarkNav extends Component {
   };
   dragStart = (e) => {
     const target = e.target;
-    e.dataTransfer.setData("card_id", target.id);
+    e.dataTransfer.setData("card_id", e.target.id);
     setTimeout(() => {
       target.style.display = "none";
     }, 0);
   };
   dragover = (e) => {
-    const target = e.target;
     e.stopPropagation();
   };
   getNavbarStyles = () => {
@@ -44,6 +43,12 @@ class DarkNav extends Component {
     style.padding = "3% 4%";
     return style;
   };
+  handleContextMenu = (e) => {
+    e.preventDefault();
+    const { toggle, styles } = this.props;
+    toggle(styles.aid);
+  };
+
   getInputStyles = () => {
     const properties = ["backgroundColor"];
     const styles = {};
@@ -58,17 +63,19 @@ class DarkNav extends Component {
       <React.Fragment>
         <div
           style={this.getNavbarStyles()}
-          id={`${this.props.styles.id}`}
+          id={this.props.styles.aid}
           onDragStart={this.dragStart}
+          onContextMenu={this.handleContextMenu}
           onDragOver={this.dragover}
           draggable={true}
         >
           {links.map((m) => (
-            <a href="#" key={m}>
+            <a href="#" key={m} draggable={false}>
               <input
                 type="text"
                 value={this.state[m]}
                 style={this.getInputStyles()}
+                draggable={false}
                 onChange={(e) => this.handleInputChange(e, `${m}`)}
                 className="anchorInput"
               />
