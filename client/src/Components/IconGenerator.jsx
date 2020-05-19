@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { IconContext } from "react-icons";
+import "../scss/main.scss"
 import {
   FaFacebookF,
   FaTwitter,
@@ -13,13 +14,23 @@ import {
   FaQuora,
 } from "react-icons/fa";
 export class IconGenerator extends Component {
+   dragStart = (e) => {
+    const target = e.target;
+    e.dataTransfer.setData("card_id", target.id);
+    setTimeout(() => {
+      target.style.display = "none";
+    }, 0);
+  };
+   dragover = (e) => {
+    e.stopPropagation();
+  };
   render() {
-    console.log(this.props["icon"]);
+    
     const icon = this.props.icon;
     let val = "";
     switch (icon) {
       case "facebook":
-        val = <FaFacebookF />;
+        val = <FaFacebookF > Hello </FaFacebookF>;
         break;
       case "github":
         val = <FaGithub />;
@@ -50,17 +61,16 @@ export class IconGenerator extends Component {
         break;
     }
     return (
-      <button style ={{
-        margin :"0",
-        padding : "0",
-        width: "5em",
-        height : "6em",
-        backgroundColor: "transparent",
-        borderColor : "transparent"
-    }}>
-      <IconContext.Provider value={{ color: "blue", size: "5rem" }}>
-        {val}
-      </IconContext.Provider>
+      <button
+        className="SocialIcons"
+        draggable="true"
+        onDragStart={this.dragStart}
+        onDragOver={this.dragOver}
+        id = {this.props.id}
+      >
+        <IconContext.Provider value={{ color: this.props.col, size: "5rem" }}>
+          {val}
+        </IconContext.Provider>
       </button>
     );
   }

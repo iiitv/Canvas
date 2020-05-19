@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import IconGenerator from "./IconGenerator";
 
 export class Icons extends Component {
+    dragOver = this.props.func1 
   render() {
     const list = (
       <ul
@@ -15,7 +16,7 @@ export class Icons extends Component {
         }}
       >
         <li>
-          <IconGenerator icon="facebook" />
+          <IconGenerator icon="facebook" col = {this.props.color} id = {this.props.aid} />
         </li>
         <li>
           <IconGenerator icon="github" />

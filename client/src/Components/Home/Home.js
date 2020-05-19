@@ -9,21 +9,23 @@ function Home() {
   const [radius, setRadius] = useState();
   const [state, setstate] = useState(false);
   const [aid, setaid] = useState();
+  const [type, settype] = useState();
   const [arr] = useState([]);
-  const btn = (col, rad, aid) => {
+  const btn = (col, rad, aid, type) => {
     setColor(col);
     setRadius(rad);
     setaid(aid);
     setstate(true);
+    settype(type);
   };
-  const [showIcons , setIcons] = useState(false);
+  const [showIcons, setIcons] = useState(false);
   function getPositions(ev) {
     console.log("hey");
     const element = {};
     if (state === true) {
       const _mouseY = ev.clientY;
       const _mouseX = ev.clientX;
-      element.type = "button";
+      element.type = type;
       element.width = "70px";
       element.color = color;
       element.top = `${_mouseY}px`;
@@ -57,20 +59,31 @@ function Home() {
   return (
     <div className="Home">
       <aside>
-        <button onClick={btn.bind(null, "red", "0px", "btn1")}>
+        <button onClick={btn.bind(null, "red", "0px", "btn1", "button")}>
           Red Button
         </button>
-        <button onClick={btn.bind(null, "blue", "0px", "btn2")}>
+        <button onClick={btn.bind(null, "blue", "0px", "btn2", "button")}>
           Blue Button
         </button>
-        <button onClick={btn.bind(null, "red", "1000px", "btn3")}>
+        <button onClick={btn.bind(null, "red", "1000px", "btn3", "button")}>
           Red Round Button
         </button>
-        <button onClick={btn.bind(null, "blue", "1000px", "btn4")}>
+        <button onClick={btn.bind(null, "blue", "1000px", "btn4", "button")}>
           Blue Round Button
         </button>
-        <button onClick = {()=>setIcons(!showIcons)}>Icons</button>
-        {showIcons&&<Icons />}
+        <button
+          onClick={() =>{
+            setIcons(
+              !showIcons
+            )
+            btn.bind(null , "blue", "0px","icn","icon")
+          }
+          }
+            
+        >
+          Icons
+        </button>
+        {showIcons && <Icons />}
       </aside>
       <div
         id="moving"
@@ -82,6 +95,17 @@ function Home() {
           if (ele.type === "button") {
             return (
               <CusButton
+                width={ele.width}
+                color={ele.color}
+                top={ele.top}
+                left={ele.left}
+                radius={ele.radius}
+                aid={ele.aid}
+              />
+            );
+          } else if (ele.type === "icon") {
+            return (
+              <Icons
                 width={ele.width}
                 color={ele.color}
                 top={ele.top}
