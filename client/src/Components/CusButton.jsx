@@ -24,6 +24,13 @@ class CusButton extends Component {
           top: this.props.top,
           borderRadius: this.props.radius,
         }}
+        onContextMenu={(e) => {
+          console.log(e);
+          e.preventDefault();
+          this.props.toggle(this.props.aid);
+          // console window object for global access
+          console.log(window.anuj);
+        }}
       >
         hello
       </button>
