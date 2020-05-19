@@ -1,93 +1,160 @@
 import React, { useState } from "react";
 import CusButton from "../CusButton";
-
 import "../../scss/main.scss";
+import DarkNav from "./DarkNavBar";
+import ContactUsForm from "./contactUs";
 
 function Home() {
-  const [color, setColor] = useState();
-  const [radius, setRadius] = useState();
-  const [state, setstate] = useState(false);
+  const [backgroundColor, setbackgroundColor] = useState();
+  const [borderRadius, setborderRadius] = useState();
+  const [didClick, setdidClick] = useState(false);
+  const [type, settype] = useState("");
   const [aid, setaid] = useState();
   const [arr] = useState([]);
-  const btn = (col, rad, aid) => {
-    setColor(col);
-    setRadius(rad);
+  const setProperties = (col, rad, aid, type) => {
+    setbackgroundColor(col);
+    setborderRadius(rad);
     setaid(aid);
-    setstate(true);
+    settype(type);
+    setdidClick(true);
   };
 
   function getPositions(ev) {
-    console.log("hey");
-    const element = {};
-    if (state === true) {
+    let specificProperties = {};
+    toggleModal();
+    let element = {};
+    if (didClick === true) {
       const _mouseY = ev.clientY;
       const _mouseX = ev.clientX;
-      element.type = "button";
-      element.width = "70px";
-      element.color = color;
+      element.type = type;
+      element.borderRadius = borderRadius;
+      element.aid = aid;
+      element.backgroundColor = backgroundColor;
+      specificProperties = getSpecificProperties(type);
+      element = { ...element, ...specificProperties };
       element.top = `${_mouseY}px`;
       element.left = `${_mouseX - 200}px`;
-      element.radius = radius;
-      element.aid = aid;
-
-      setstate(false);
+      setdidClick(false);
     } else {
       return;
     }
     arr.push(element);
   }
 
+  const parsePx = (x) => {
+    return parseInt(x.split("px")[0]);
+  };
+  const toggleModal = (id) => {
+    const modal = document.querySelector(".modal");
+    if (id) {
+      const tid = document.getElementById(id);
+      modal.classList.add("visible");
+      modal.style.top = parsePx(tid.style.top) + 5 + "px";
+      modal.style.left = parsePx(tid.style.left) + 260 + "px";
+      return;
+    }
+    modal.classList.remove("visible");
+  };
+  const getSpecificProperties = (type) => {
+    const properties = {
+      button: {
+        width: "70px",
+      },
+      navbar: {
+        display: "flexbox",
+        position: "absolute",
+        width: "800px",
+        height: "150px",
+      },
+      contactUs: {
+        position: "absolute",
+        width: "400px",
+        height: "600px",
+        padding: "50px",
+      },
+    };
+    return properties[type];
+  };
+
   const drop = (e) => {
     e.preventDefault();
-
     const _mouseY = e.clientY;
     const _mouseX = e.clientX;
     const card_id = e.dataTransfer.getData("card_id");
-    console.log(card_id);
-    const card = document.getElementById(card_id);
-    card.style.display = "block";
-    card.style.top = `${_mouseY}px`;
-    card.style.left = `${_mouseX - 200}px `;
-    console.log(card.style.top, card.style.top);
+    if (card_id) {
+      const card = document.getElementById(card_id);
+      card.style.display = "block";
+      card.style.top = `${_mouseY}px`;
+      card.style.left = `${_mouseX - 200}px `;
+    }
   };
   const dragOver = (e) => {
     e.preventDefault();
   };
+  const renderSidebarButton = (color, radius, id, label, type) => {
+    return (
+      <button
+        onClick={() =>
+          setProperties(`${color}`, `${radius}`, `${id}`, `${type}`)
+        }
+      >
+        {label}
+      </button>
+    );
+  };
+  const getComponent = (type, element, index) => {
+    const components = {
+      button: <CusButton key={index} styles={element} toggle={toggleModal} />,
+      navbar: <DarkNav key={index} styles={element} toggle={toggleModal} />,
+      contactUs: (
+        <ContactUsForm key={index} styles={element} toggle={toggleModal} />
+      ),
+    };
+    return components[type];
+  };
   return (
     <div className="Home">
-      <aside>
-        <button onClick={btn.bind(null, "red", "0px", "btn1")}>
-          Red Button
-        </button>
-        <button onClick={btn.bind(null, "blue", "0px", "btn2")}>
-          Blue Button
-        </button>
-        <button onClick={btn.bind(null, "red", "1000px", "btn3")}>
-          Red Round Button
-        </button>
-        <button onClick={btn.bind(null, "blue", "1000px", "btn4")}>
-          Blue Round Button
-        </button>
+      <aside className="sidebar">
+        <h1>Our Components</h1>
+        {renderSidebarButton(
+          "lightgrey",
+          "25px",
+          "btn3",
+          "Red Round Button",
+          "button"
+        )}
+        {renderSidebarButton(
+          "orange",
+          "25",
+          "btn4",
+          "Blue round Button",
+          "button"
+        )}
+        {renderSidebarButton("#d9455f", "18px", "nav1", "add navbar", "navbar")}
+        {renderSidebarButton(
+          "#fff",
+          "30px",
+          "contact",
+          "contact us",
+          "contactUs"
+        )}
       </aside>
+      <div className="modal" id="add-modal">
+        <div className="modal__content">
+          <ul>
+            <li>Edit</li>
+            <li>Remove</li>
+          </ul>
+        </div>
+      </div>
       <div
         id="moving"
         onDrop={drop}
         onDragOver={dragOver}
         onClick={getPositions}
       >
-        {arr.map((ele) => {
-          if (ele.type === "button") {
-            return (
-              <CusButton
-                width={ele.width}
-                color={ele.color}
-                top={ele.top}
-                left={ele.left}
-                radius={ele.radius}
-                aid={ele.aid}
-              />
-            );
-          }
+        {arr.map((element, index) => {
+          return getComponent(element.type, element, index);
         })}
       </div>
     </div>
