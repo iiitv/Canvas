@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import CusButton from "../CusButton";
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
 
 import "../../scss/main.scss";
 import Icons from "../Icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-library.add(fab)
+library.add(fab);
 function Home() {
-
   const [color, setColor] = useState();
   const [radius, setRadius] = useState();
   const [state, setstate] = useState(false);
@@ -16,6 +16,7 @@ function Home() {
   const [type, settype] = useState();
   const [arr] = useState([]);
   const btn = (col, rad, aid, type) => {
+    console.log(col, rad, aid, type);
     setColor(col);
     setRadius(rad);
     setaid(aid);
@@ -24,7 +25,6 @@ function Home() {
   };
   const [showIcons, setIcons] = useState(false);
   function getPositions(ev) {
-    console.log("hey");
     const element = {};
     if (state === true) {
       const _mouseY = ev.clientY;
@@ -41,6 +41,7 @@ function Home() {
     } else {
       return;
     }
+    // console.log(element);
     arr.push(element);
   }
 
@@ -60,6 +61,7 @@ function Home() {
   const dragOver = (e) => {
     e.preventDefault();
   };
+  
   return (
     <div className="Home">
       <aside>
@@ -82,7 +84,9 @@ function Home() {
         >
           Icons
         </button>
-        {showIcons && <Icons />}
+        {showIcons && (
+          <Icons btn={btn} />
+        )}
       </aside>
       <div
         id="moving"
@@ -101,6 +105,21 @@ function Home() {
                 radius={ele.radius}
                 aid={ele.aid}
               />
+            );
+          } else if (ele.type === "icon") {
+            console.log(ele)
+            return (
+              <FontAwesomeIcon
+                icon={["fab", ele.aid]}
+                size="5x"
+                style={{
+                  position:'absolute',
+                  left: ele.left,
+                  top: ele.top,
+                }}
+              >
+                {ele.aid}
+              </FontAwesomeIcon>
             );
           }
         })}
