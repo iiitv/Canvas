@@ -30,7 +30,7 @@ export class IconGenerator extends Component {
     let val = "";
     switch (icon) {
       case "facebook":
-        val = <FaFacebookF > Hello </FaFacebookF>;
+        val = <FaFacebookF />;
         break;
       case "github":
         val = <FaGithub />;
@@ -66,7 +66,7 @@ export class IconGenerator extends Component {
         draggable="true"
         onDragStart={this.dragStart}
         onDragOver={this.dragOver}
-        id = {this.props.id}
+        id = {this.props.icon}
       >
         <IconContext.Provider value={{ color: this.props.col, size: "5rem" }}>
           {val}

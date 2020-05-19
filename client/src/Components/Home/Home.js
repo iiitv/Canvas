@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import CusButton from "../CusButton";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
 
 import "../../scss/main.scss";
 import Icons from "../Icons";
 
+library.add(fab)
 function Home() {
+
   const [color, setColor] = useState();
   const [radius, setRadius] = useState();
   const [state, setstate] = useState(false);
@@ -72,14 +76,9 @@ function Home() {
           Blue Round Button
         </button>
         <button
-          onClick={() =>{
-            setIcons(
-              !showIcons
-            )
-            btn.bind(null , "blue", "0px","icn","icon")
-          }
-          }
-            
+          onClick={() => {
+            setIcons(!showIcons);
+          }}
         >
           Icons
         </button>
@@ -95,17 +94,6 @@ function Home() {
           if (ele.type === "button") {
             return (
               <CusButton
-                width={ele.width}
-                color={ele.color}
-                top={ele.top}
-                left={ele.left}
-                radius={ele.radius}
-                aid={ele.aid}
-              />
-            );
-          } else if (ele.type === "icon") {
-            return (
-              <Icons
                 width={ele.width}
                 color={ele.color}
                 top={ele.top}

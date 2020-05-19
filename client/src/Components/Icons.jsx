@@ -1,9 +1,21 @@
 import React, { Component } from "react";
 import IconGenerator from "./IconGenerator";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export class Icons extends Component {
-    dragOver = this.props.func1 
+  dragOver = this.props.func1;
+  i;
   render() {
+    const iconTray = [
+      "facebook",
+      "github",
+      "google",
+      "dribbble",
+      "instagram",
+      "linkedin",
+      "medium",
+      "quora",
+      "twitter",
+    ];
     const list = (
       <ul
         style={{
@@ -11,40 +23,16 @@ export class Icons extends Component {
           listStyle: "none",
           gridTemplateColumns: "1fr 1fr ",
           border: "0",
-          margin: "0",
-          padding: "0"
+          margin: "10px",
+          padding: "0",
         }}
       >
-        <li>
-          <IconGenerator icon="facebook" col = {this.props.color} id = {this.props.aid} />
-        </li>
-        <li>
-          <IconGenerator icon="github" />
-        </li>
-        <li>
-          <IconGenerator icon="dribbble" />
-        </li>
-        <li>
-          <IconGenerator icon="google" />
-        </li>
-        <li>
-          <IconGenerator icon="instagram" />
-        </li>
-        <li>
-          <IconGenerator icon="linkedin" />
-        </li>
-        <li>
-          <IconGenerator icon="medium" />
-        </li>
-        <li>
-          <IconGenerator icon="pintrest" />
-        </li>
-        <li>
-          <IconGenerator icon="quora" />
-        </li>
-        <li>
-          <IconGenerator icon="twitter" />
-        </li>
+        {iconTray.map((iconV) => (
+          <li style={{padding : "2px"}} className = {iconV}  >
+            {/* <IconGenerator icon={iconV} />{" "} */}
+            <FontAwesomeIcon icon={['fab', iconV] } size = "5x" >{iconV}</FontAwesomeIcon>
+          </li>
+        ))} 
       </ul>
     );
     return <div>{list}</div>;
