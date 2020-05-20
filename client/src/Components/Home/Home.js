@@ -16,8 +16,29 @@ function Home() {
   const [aid, setaid] = useState();
   const [type, settype] = useState();
   const [arr] = useState([]);
-  const btn = (col, rad, aid, type) => {
-    console.log(col, rad, aid, type);
+
+  // testing for global access
+  window.anuj = "puri";
+  //  global acess successful
+
+  const parsePx = (x) => {
+    console.log("merelie", parseInt(x.split("px")[0]));
+    return parseInt(x.split("px")[0]);
+  };
+  const toggleModal = (id) => {
+    const modal = document.querySelector(".modal");
+    if (id) {
+      const tid = document.getElementById(id);
+      modal.classList.add("visible");
+      console.log(tid.style.top, tid.style.top.left);
+      modal.style.top = parsePx(tid.style.top) + 5 + "px";
+      modal.style.left = parsePx(tid.style.left) + 260 + "px";
+      return;
+    }
+    modal.classList.remove("visible");
+  };
+
+  const btn = (col, rad, aid , type) => {
     setColor(col);
     setRadius(rad);
     setaid(aid);
@@ -26,6 +47,7 @@ function Home() {
   };
   const [showIcons, setIcons] = useState(false);
   function getPositions(ev) {
+    toggleModal();
     const element = {};
     if (state === true) {
       const _mouseY = ev.clientY;
@@ -89,39 +111,38 @@ function Home() {
           <Icons btn={btn} />
         )}
       </aside>
+      <div className="modal" id="add-modal">
+        <div className="modal__content">
+          <ul>
+            <li>Edit</li>
+            <li>Remove</li>
+          </ul>
+        </div>
+      </div>
       <div
         id="moving"
         onDrop={drop}
         onDragOver={dragOver}
         onClick={getPositions}
       >
-        {arr.map((ele) => {
+        {arr.map((ele, index) => {
           if (ele.type === "button") {
             return (
               <CusButton
+                key={index}
                 width={ele.width}
                 color={ele.color}
                 top={ele.top}
                 left={ele.left}
                 radius={ele.radius}
                 aid={ele.aid}
+                toggle={toggleModal}
               />
             );
           } else if (ele.type === "icon") {
             console.log(ele)
             return (
               <div>
-              {/* <FontAwesomeIcon
-                icon={["fab", ele.aid]}
-                size="5x"
-                style={{
-                  position:'absolute',
-                  left: ele.left,
-                  top: ele.top,
-                }}
-              >
-                {ele.aid}
-              </FontAwesomeIcon> */}
               <IconGenerator ele = {ele} ></IconGenerator>
               </div>
             );

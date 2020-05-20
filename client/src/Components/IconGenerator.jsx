@@ -31,6 +31,7 @@ export class IconGenerator extends Component {
                   top: this.props.ele.top,
                   color: this.props.ele.color
                 }}
+                toggle={this.props.ele.toggleModal}
               >
                 {this.props.ele.aid}
               </FontAwesomeIcon>
