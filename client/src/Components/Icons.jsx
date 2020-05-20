@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import IconGenerator from "./IconGenerator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export class Icons extends Component {
   dragOver = this.props.func1;

@@ -6,6 +6,7 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import "../../scss/main.scss";
 import Icons from "../Icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import IconGenerator from "../IconGenerator";
 
 library.add(fab);
 function Home() {
@@ -109,7 +110,8 @@ function Home() {
           } else if (ele.type === "icon") {
             console.log(ele)
             return (
-              <FontAwesomeIcon
+              <div>
+              {/* <FontAwesomeIcon
                 icon={["fab", ele.aid]}
                 size="5x"
                 style={{
@@ -119,7 +121,9 @@ function Home() {
                 }}
               >
                 {ele.aid}
-              </FontAwesomeIcon>
+              </FontAwesomeIcon> */}
+              <IconGenerator ele = {ele} ></IconGenerator>
+              </div>
             );
           }
         })}

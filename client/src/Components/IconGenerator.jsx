@@ -1,18 +1,6 @@
 import React, { Component } from "react";
-import { IconContext } from "react-icons";
 import "../scss/main.scss"
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedin,
-  FaGithub,
-  FaGoogle,
-  FaPinterest,
-  FaMedium,
-  FaDribbble,
-  FaQuora,
-} from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export class IconGenerator extends Component {
    dragStart = (e) => {
     const target = e.target;
@@ -26,51 +14,26 @@ export class IconGenerator extends Component {
   };
   render() {
     
-    const icon = this.props.icon;
-    let val = "";
-    switch (icon) {
-      case "facebook":
-        val = <FaFacebookF />;
-        break;
-      case "github":
-        val = <FaGithub />;
-        break;
-      case "dribbble":
-        val = <FaDribbble />;
-        break;
-      case "google":
-        val = <FaGoogle />;
-        break;
-      case "instagram":
-        val = <FaInstagram />;
-        break;
-      case "linkedin":
-        val = <FaLinkedin />;
-        break;
-      case "medium":
-        val = <FaMedium />;
-        break;
-      case "pintrest":
-        val = <FaPinterest />;
-        break;
-      case "quora":
-        val = <FaQuora />;
-        break;
-      case "twitter":
-        val = <FaTwitter />;
-        break;
-    }
     return (
       <button
         className="SocialIcons"
         draggable="true"
         onDragStart={this.dragStart}
         onDragOver={this.dragOver}
-        id = {this.props.icon}
+        id = {this.props.ele.aid}
       >
-        <IconContext.Provider value={{ color: this.props.col, size: "5rem" }}>
-          {val}
-        </IconContext.Provider>
+        <FontAwesomeIcon
+                icon={["fab", this.props.ele.aid]}
+                size="5x"
+                style={{
+                  position:'initial',
+                  left: this.props.ele.left,
+                  top: this.props.ele.top,
+                  color: this.props.ele.color
+                }}
+              >
+                {this.props.ele.aid}
+              </FontAwesomeIcon>
       </button>
     );
   }
