@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import IconGenerator from "./IconGenerator";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export class Icons extends Component {
   dragOver = this.props.func1;
   i;
@@ -28,11 +28,19 @@ export class Icons extends Component {
         }}
       >
         {iconTray.map((iconV) => (
-          <li style={{padding : "2px"}} className = {iconV}  >
+          <li style={{ padding: "2px" }} className={iconV}>
             {/* <IconGenerator icon={iconV} />{" "} */}
-            <FontAwesomeIcon icon={['fab', iconV] } size = "5x" >{iconV}</FontAwesomeIcon>
+            <FontAwesomeIcon
+              icon={["fab", iconV]}
+              size="5x"
+              onClick={(event) => {
+                this.props.btn("black", null, iconV, "icon");
+              }}
+            >
+              {iconV}
+            </FontAwesomeIcon>
           </li>
-        ))} 
+        ))}
       </ul>
     );
     return <div>{list}</div>;
