@@ -1,0 +1,28 @@
+.modal {
+  position: fixed;
+  z-index: 100;
+  background: white;
+  width: max-content;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  display: none;
+
+  ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    font-size: 14px;
+
+    li {
+      padding: 10px;
+
+      &:hover {
+        background-color: #f1f1f1;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.visible {
+  display: block;
+}
