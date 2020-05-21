@@ -13,27 +13,27 @@ export class IconGenerator extends Component {
     e.stopPropagation();
   };
   render() {
-    
+    console.log(this.props.styles)
     return (
       <button
         className="SocialIcons"
         draggable="true"
         onDragStart={this.dragStart}
         onDragOver={this.dragOver}
-        id = {this.props.ele.aid}
+        id = {this.props.styles.aid}
       >
         <FontAwesomeIcon
-                icon={["fab", this.props.ele.aid]}
+                icon={["fab", this.props.styles.aid]}
                 size="5x"
                 style={{
-                  position:'initial',
-                  left: this.props.ele.left,
-                  top: this.props.ele.top,
-                  color: this.props.ele.color
+                  position:this.props.styles.position,
+                  left: this.props.styles.left,
+                  top: this.props.styles.top,
+                  color: this.props.styles.color
                 }}
-                toggle={this.props.ele.toggleModal}
+                toggle={this.props.toggle}
               >
-                {this.props.ele.aid}
+                {this.props.key}
               </FontAwesomeIcon>
       </button>
     );
