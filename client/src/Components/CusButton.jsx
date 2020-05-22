@@ -50,26 +50,9 @@ class CusButton extends Component {
         draggable="true"
         onDragStart={this.dragStart}
         onDragOver={this.dragover}
-<<<<<<< HEAD
-        id={this.props.aid}
-        style={{
-          color: this.props.color,
-          left: this.props.left,
-          top: this.props.top,
-          borderRadius: this.props.radius,
-        }}
-        onContextMenu={(e) => {
-          console.log(e);
-          e.preventDefault();
-          this.props.toggle(this.props.aid);
-          // console window object for global access
-          console.log(window.anuj);
-        }}
-=======
         id={aid}
         style={this.getButtonStyles()}
         onContextMenu={this.handleContextMenu}
->>>>>>> d82c6fc60d083b463d9991d533c1b886b49c6bf1
       >
         <input
           type="text"

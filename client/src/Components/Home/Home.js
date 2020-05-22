@@ -3,6 +3,7 @@ import CusButton from "../CusButton";
 import "../../scss/main.scss";
 import DarkNav from "./DarkNavBar";
 import ContactUsForm from "./contactUs";
+import TextBox from "./TextBox";
 
 function Home() {
   const [backgroundColor, setbackgroundColor] = useState();
@@ -72,6 +73,19 @@ function Home() {
         height: "600px",
         padding: "50px",
       },
+      Text: {
+
+        padding: "12px 20px",
+        margin: "8px 0",
+        boxSizing: "border-box",
+        border: "1px solid #555",
+        outline: "none",
+        width: "200px",
+        
+       
+      },
+
+
     };
     return properties[type];
   };
@@ -81,7 +95,9 @@ function Home() {
     const _mouseY = e.clientY;
     const _mouseX = e.clientX;
     const card_id = e.dataTransfer.getData("card_id");
+    console.log(card_id)
     if (card_id) {
+
       const card = document.getElementById(card_id);
       card.style.display = "block";
       card.style.top = `${_mouseY}px`;
@@ -109,13 +125,17 @@ function Home() {
       contactUs: (
         <ContactUsForm key={index} styles={element} toggle={toggleModal} />
       ),
+      Text: (
+        <TextBox key={index} styles={element} toggle={toggleModal} />
+      ),   
+
     };
     return components[type];
   };
   return (
     <div className="Home">
       <aside className="sidebar">
-        <h1>Our Components</h1>
+        <h1  style={{color: "red"}}>Our Components</h1>
         {renderSidebarButton(
           "lightgrey",
           "25px",
@@ -138,6 +158,16 @@ function Home() {
           "contact us",
           "contactUs"
         )}
+
+        {renderSidebarButton(
+          "#92D9A6",
+          "25",
+          "box1",
+          "Simple Textbox",
+          "Text"
+        )}
+        
+
       </aside>
       <div className="modal" id="add-modal">
         <div className="modal__content">
@@ -158,6 +188,7 @@ function Home() {
         })}
       </div>
     </div>
+    
   );
 }
 export default Home;
