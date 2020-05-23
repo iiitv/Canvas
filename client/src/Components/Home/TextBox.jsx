@@ -29,10 +29,9 @@ class TextBox extends Component {
   getInputStyles = () => {
     const element = this.props.styles;
     const style = {};
-   // element[backgroundColor] =  this.state.hover ? 'grey': this.props.backgroundColor;
+   
     const properties = [
       "position",
-      "backgroundColor",
       "margin",
       "boxSizing",  
       "borderRadius",
@@ -46,7 +45,7 @@ class TextBox extends Component {
    for (const property of properties) {
       style[property] = element[property];
     }
-    style['backgroundColor'] =  this.state.hover ? 'grey': element['backgroundColor'];
+   
     return style;
   };
 
@@ -56,17 +55,7 @@ class TextBox extends Component {
     toggle(styles.aid);
   };
 
-  handleMouseIn() {
-    this.setState({ hover: true })
-  }
-  
-  handleMouseOut() {
-    this.setState({ hover: false })
-  }
-
-//   hoverStyle = {
-//     backgroundColor: this.state.hover ? 'grey' : ''
-//   }  
+ 
   
   
   render() {
@@ -74,23 +63,22 @@ class TextBox extends Component {
    
         
          
-         
+         <div className="topbox">
           <input 
           
                 type="text"
                 value = {this.state.username}
                 style={this.getInputStyles()}
                 draggable={true}
-                placeholder={"type your text here"}
+                placeholder={"Type your text here"}
                 onChange={this.myChangeHandler}
-                className="textbox"
+                className="field"
                 onDragStart={this.dragStart}
                 onDragOver={this.dragover}
                 id={this.props.styles.aid}
                 onContextMenu={this.handleContextMenu}
               />     
-        
-        
+       </div>
     );
   }
 

@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Handlee&family=Maven+Pro&display=swap");
+$fontfamily: "Maven Pro", sans-serif;
+
+.textbox{
+    margin-bottom: 10px;
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 3% 4%;
+    font-size: 20px;
+    background-color: #ebeef1;
+    border-radius: 30px;
+
+}
+
+.field {
+    width: 100%;
+    height: 56px;
+    border-radius: 4px;
+    position: relative;
+    background-color: lightblue;
+    transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out;
+  }
+
+  .field:hover {
+    background-color: lightcyan;
+    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
+  }
+
+  .topbox input {
+    width: 100%;
+    height: 56px;
+    position: relative;
+    padding: 0px 16px;
+    border: none;
+    border-radius: 4px;
+    font-family: $fontfamily;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+    background-color: lightsteelblue;
+    color: black;
+    outline: none;
+    box-shadow: 0px 4px 20px 0px transparent;
+    transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out,
+      0.1s padding ease-in-out;
+    -webkit-appearance: none;
+  }
+
+  .field input::-webkit-input-placeholder {
+    color: red;
+  }
+  .field input::-moz-placeholder {
+    color: red;
+  }
+  .field input:-ms-input-placeholder {
+    color: red;
+  }
+  .field input:-moz-placeholder {
+    color: red  ;
+  }
