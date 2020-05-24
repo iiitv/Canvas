@@ -79,7 +79,7 @@ function Home() {
         padding: "50px",
       },
       icon : {
-        position: "initial",
+        // position: "initial",
         color: "blue",
       }
     };
@@ -123,7 +123,7 @@ function Home() {
         <ContactUsForm key={index} styles={element} toggle={toggleModal} />
       ),
       icon: (
-        <IconGenerator  styles = {element} toggle = {toggleModal} />
+        <IconGenerator key={index} styles = {element} toggle = {toggleModal} />
       ),
     };
     return components[type];
@@ -178,6 +178,7 @@ function Home() {
         onClick={getPositions}
       >
         {arr.map((element, index) => {
+          console.log(element.type,index)
           return getComponent(element.type, element, index);
         })}
       </div>

@@ -9,11 +9,17 @@ export class IconGenerator extends Component {
       target.style.display = "none";
     }, 0);
   };
+  handleContextMenu = (e) => {
+    e.preventDefault();
+    const { toggle, styles } = this.props;
+    toggle(styles.aid);
+  };
    dragover = (e) => {
     e.stopPropagation();
   };
   render() {
     console.log(this.props.styles)
+    const name = this.props.styles.aid.split("!")[0];
     return (
       <button
         className="SocialIcons"
@@ -21,17 +27,21 @@ export class IconGenerator extends Component {
         onDragStart={this.dragStart}
         onDragOver={this.dragOver}
         id = {this.props.styles.aid}
+        style={{
+          // position:this.props.styles.position,
+          left: this.props.styles.left,
+          top: this.props.styles.top,
+          
+        }}
+        onContextMenu = {this.handleContextMenu}
+        // toggle={this.props.styles.aid}
       >
         <FontAwesomeIcon
-                icon={["fab", this.props.styles.aid]}
+                icon={["fab", name]}
                 size="5x"
                 style={{
-                  position:this.props.styles.position,
-                  left: this.props.styles.left,
-                  top: this.props.styles.top,
                   color: this.props.styles.color
                 }}
-                toggle={this.props.toggle}
               >
                 {this.props.key}
               </FontAwesomeIcon>

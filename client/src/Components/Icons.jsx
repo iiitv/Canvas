@@ -26,14 +26,14 @@ export class Icons extends Component {
           padding: "0",
         }}
       >
-        {iconTray.map((iconV) => (
-          <li style={{ padding: "2px" }} className={iconV}>
+        {iconTray.map((iconV,idx) => (
+          <li key={idx} style={{ padding: "2px" }} className={iconV}>
             {/* <IconGenerator icon={iconV} />{" "} */}
             <FontAwesomeIcon
               icon={["fab", iconV]}
               size="5x"
               onClick={(event) => {
-                this.props.btn("black", null, iconV, "icon");
+                this.props.btn("black", null, iconV+"!"+ Math.random(), "icon");
               }}
             >
               {iconV}
