@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import CusButton from "../CusButton";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import Icons from "../Icons";
+import IconGenerator from "../IconGenerator";
 import "../../scss/main.scss";
 import DarkNav from "./DarkNavBar";
 import ContactUsForm from "./contactUs";
 
+library.add(fab);
 function Home() {
   const [backgroundColor, setbackgroundColor] = useState();
   const [borderRadius, setborderRadius] = useState();
   const [didClick, setdidClick] = useState(false);
   const [type, settype] = useState("");
   const [aid, setaid] = useState();
+  const [showIcons, setIcons] = useState(false);
   const [arr] = useState([]);
   const setProperties = (col, rad, aid, type) => {
     setbackgroundColor(col);
@@ -18,7 +24,6 @@ function Home() {
     settype(type);
     setdidClick(true);
   };
-
   function getPositions(ev) {
     let specificProperties = {};
     toggleModal();
@@ -38,6 +43,7 @@ function Home() {
     } else {
       return;
     }
+    // console.log(element);
     arr.push(element);
   }
 
@@ -72,6 +78,10 @@ function Home() {
         height: "600px",
         padding: "50px",
       },
+      icon : {
+        // position: "initial",
+        color: "blue",
+      }
     };
     return properties[type];
   };
@@ -94,8 +104,11 @@ function Home() {
   const renderSidebarButton = (color, radius, id, label, type) => {
     return (
       <button
-        onClick={() =>
+        onClick={() =>{
+          if(id === "iconlist")
+           setIcons(!showIcons) 
           setProperties(`${color}`, `${radius}`, `${id}`, `${type}`)
+        }
         }
       >
         {label}
@@ -108,6 +121,9 @@ function Home() {
       navbar: <DarkNav key={index} styles={element} toggle={toggleModal} />,
       contactUs: (
         <ContactUsForm key={index} styles={element} toggle={toggleModal} />
+      ),
+      icon: (
+        <IconGenerator key={index} styles = {element} toggle = {toggleModal} />
       ),
     };
     return components[type];
@@ -138,6 +154,14 @@ function Home() {
           "contact us",
           "contactUs"
         )}
+        {renderSidebarButton(
+          "#fff",
+          "30px",
+          "iconlist",
+          "Social Icons",
+          "icons"
+        )}
+        {showIcons&&<Icons btn = {setProperties}/>}
       </aside>
       <div className="modal" id="add-modal">
         <div className="modal__content">
@@ -154,6 +178,7 @@ function Home() {
         onClick={getPositions}
       >
         {arr.map((element, index) => {
+          console.log(element.type,index)
           return getComponent(element.type, element, index);
         })}
       </div>
