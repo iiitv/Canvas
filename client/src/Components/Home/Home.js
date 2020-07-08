@@ -78,10 +78,10 @@ function Home() {
         height: "600px",
         padding: "50px",
       },
-      icon : {
+      icon: {
         // position: "initial",
         color: "blue",
-      }
+      },
     };
     return properties[type];
   };
@@ -97,6 +97,7 @@ function Home() {
       card.style.top = `${_mouseY}px`;
       card.style.left = `${_mouseX - 200}px `;
     }
+    console.log(_mouseX, _mouseY);
   };
   const dragOver = (e) => {
     e.preventDefault();
@@ -104,12 +105,10 @@ function Home() {
   const renderSidebarButton = (color, radius, id, label, type) => {
     return (
       <button
-        onClick={() =>{
-          if(id === "iconlist")
-           setIcons(!showIcons) 
-          setProperties(`${color}`, `${radius}`, `${id}`, `${type}`)
-        }
-        }
+        onClick={() => {
+          if (id === "iconlist") setIcons(!showIcons);
+          setProperties(`${color}`, `${radius}`, `${id}`, `${type}`);
+        }}
       >
         {label}
       </button>
@@ -122,9 +121,7 @@ function Home() {
       contactUs: (
         <ContactUsForm key={index} styles={element} toggle={toggleModal} />
       ),
-      icon: (
-        <IconGenerator key={index} styles = {element} toggle = {toggleModal} />
-      ),
+      icon: <IconGenerator key={index} styles={element} toggle={toggleModal} />,
     };
     return components[type];
   };
@@ -161,7 +158,7 @@ function Home() {
           "Social Icons",
           "icons"
         )}
-        {showIcons&&<Icons btn = {setProperties}/>}
+        {showIcons && <Icons btn={setProperties} />}
       </aside>
       <div className="modal" id="add-modal">
         <div className="modal__content">
@@ -178,7 +175,7 @@ function Home() {
         onClick={getPositions}
       >
         {arr.map((element, index) => {
-          console.log(element.type,index)
+          console.log(element.type, index);
           return getComponent(element.type, element, index);
         })}
       </div>

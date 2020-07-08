@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "../scss/main.scss"
+import "../scss/main.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export class IconGenerator extends Component {
-   dragStart = (e) => {
+  dragStart = (e) => {
     const target = e.target;
     e.dataTransfer.setData("card_id", target.id);
     setTimeout(() => {
@@ -14,11 +14,30 @@ export class IconGenerator extends Component {
     const { toggle, styles } = this.props;
     toggle(styles.aid);
   };
-   dragover = (e) => {
+  dragover = (e) => {
     e.stopPropagation();
   };
+  getIconStyle = () => {
+    const icn = this.props.styles;
+    const style = {};
+    const properties = [
+      "width",
+      "height",
+      "backgroundColor",
+      "top",
+      "left",
+      "borderRadius",
+      "position",
+    ];
+    for (const property of properties) {
+      style[property] = icn[property];
+    }
+    return style;
+  };
   render() {
-    console.log(this.props.styles)
+    console.log(this.props);
+    console.log(this.props.key);
+    console.log(this.props.styles);
     const name = this.props.styles.aid.split("!")[0];
     return (
       <button
@@ -26,25 +45,20 @@ export class IconGenerator extends Component {
         draggable="true"
         onDragStart={this.dragStart}
         onDragOver={this.dragOver}
-        id = {this.props.styles.aid}
-        style={{
-          // position:this.props.styles.position,
-          left: this.props.styles.left,
-          top: this.props.styles.top,
-          
-        }}
-        onContextMenu = {this.handleContextMenu}
+        id={this.props.styles.aid}
+        style={this.getIconStyle()}
+        onContextMenu={this.handleContextMenu}
         // toggle={this.props.styles.aid}
       >
         <FontAwesomeIcon
-                icon={["fab", name]}
-                size="5x"
-                style={{
-                  color: this.props.styles.color
-                }}
-              >
-                {this.props.key}
-              </FontAwesomeIcon>
+          icon={["fab", name]}
+          size="5x"
+          style={{
+            color: this.props.styles.color,
+          }}
+        >
+          {this.props.key}
+        </FontAwesomeIcon>
       </button>
     );
   }
