@@ -1,18 +1,15 @@
-@import "abstracts/functions";
-@import "abstracts/mixin";
-@import "abstracts/variables";
+// BASIC STYLES
+@import 'abstracts/variables';
+@import 'base/base';
+@import 'base/animations';
 
-@import "base/animations";
-@import "base/base";
-@import "base/typography";
-@import "base/utilities";
+// COMPONENTS
+@import 'components/sidebar';
+@import 'components/contextmenu';
+@import 'components/properties';
 
-@import "pages/home";
+// ELEMENTS THAT WE CAN ADD
+@import 'elements/elements';
 
-@import "components/button";
-@import "components/aside";
-@import "components/moving";
-@import "components/icons";
-@import "components/navbar";
-@import "components/contactus";
-@import "components/home";
+// LAYOUTS
+@import 'layouts/home';

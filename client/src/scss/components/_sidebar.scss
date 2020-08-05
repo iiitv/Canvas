@@ -1,0 +1,51 @@
+.sidebar {
+  background-color: #fff;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 30rem;
+  padding: 1rem 0;
+
+  &__section {
+    position: relative;
+    width: 100%;
+
+    &__title {
+      font-size: 2rem;
+      max-width: 90%;
+      margin: 0 auto;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    &__content {
+      // background-color: #eee;
+      height: 10rem;
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+
+  &__divider {
+    background-color: #ccc;
+    border-radius: 10px;
+    width: 90%;
+    margin: 1rem auto;
+    height: 2px;
+  }
+
+  &__component {
+    background-color: #eee;
+    margin: 1rem auto;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    span {
+      margin: 0 1rem;
+    }
+  }
+}

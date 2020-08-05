@@ -1,0 +1,32 @@
+.properties {
+  position: absolute;
+  width: 50rem;
+  height: 50rem;
+  top: 5rem;
+  right: 2rem;
+  z-index: 2;
+  background-color: #fff;
+  box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.1);
+  animation: bounceIn 0.3s ease-out;
+  border-radius: 10px;
+
+  &__title {
+    font-size: 2.5rem;
+    padding: 1rem 2rem;
+  }
+
+  &__message {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  &__divider {
+    background-color: #ccc;
+    width: 90%;
+    margin: 0 auto;
+    height: 2px;
+    border-radius: 10px;
+  }
+}

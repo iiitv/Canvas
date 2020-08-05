@@ -1,0 +1,13 @@
+.home {
+  width: 100vw;
+  height: 100vh;
+
+  &__canvas {
+    background-color: #eee;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100vw - 30rem);
+    height: 100vh;
+  }
+}
