@@ -1,6 +1,7 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import Sidebar from '../Components/Sidebar';
 import uniqid from 'uniqid';
+import { createButton, createText } from './../logic/ElementCreators';
 
 import Button from '../elements/Button';
 import Text from '../elements/Text';
@@ -13,51 +14,71 @@ const Home = ({
   setModalOpen,
   selected,
   setSelected,
+  updateElement,
   removeSelection,
 }) => {
-  const addButton = coords => {
-    const id = uniqid();
-    const btn = {
-      element: (
-        <Button
-          text="Pasta"
-          position={coords}
-          height="50"
-          width="100"
-          setModalOpen={setModalOpen}
-          removeElement={removeElement}
-          id={id}
-          setSelected={setSelected}
-        />
-      ),
-      id,
+  /*
+  
+  const { text, position, height, width, allowContextMenu } = config;
+
+  const {
+    setModalOpen,
+    removeElement,
+    setSelected,
+    removeSelected,
+    addElement,
+  } = functions;
+*/
+
+  const addButton = position => {
+    const buttonConfig = {
+      text: 'Button',
+      position,
+      height: 'auto',
+      width: 'auto',
+      allowContextMenu: true,
+      backgroundColor: '#ccc',
+      textColor: '#000',
     };
-    addElement(btn);
+
+    const buttonFunctions = {
+      setModalOpen,
+      removeElement,
+      setSelected,
+      removeSelection,
+      addElement,
+      updateElement,
+    };
+    createButton(buttonConfig, buttonFunctions);
   };
-  const addText = coords => {
-    const id = uniqid();
-    const text = {
-      element: (
-        <Text
-          text="Pasta"
-          position={coords}
-          height="50"
-          width="100"
-          setModalOpen={setModalOpen}
-          removeElement={removeElement}
-          id={id}
-          setSelected={setSelected}
-        />
-      ),
-      id,
+  const addText = position => {
+    const textConfig = {
+      text: 'Text',
+      position,
+      height: 50,
+      width: 100,
+      allowContextMenu: true,
+      backgroundColor: 'transparent',
+      textColor: '#000',
     };
-    addElement(text);
+
+    const textFunctions = {
+      setModalOpen,
+      removeElement,
+      setSelected,
+      removeSelection,
+      addElement,
+      updateElement,
+    };
+    createText(textConfig, textFunctions);
   };
 
   return (
     <div className="home">
       <Sidebar />
-      {selected ? <Properties /> : null}
+      {selected ? (
+        <Properties updateElement={updateElement} selected={selected} />
+      ) : null}
       <div
         className="home__canvas"
         onClick={e => {

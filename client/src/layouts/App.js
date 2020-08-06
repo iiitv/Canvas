@@ -26,9 +26,28 @@ export class App extends Component {
     });
   };
 
+  updateElement = (id, element) => {
+    let newArray = this.state.elements;
+    let active = newArray.filter(cur => cur.id === id)[0];
+    let index = newArray.indexOf(active);
+    console.log(active);
+    newArray.splice(index, 1, { id, element });
+    this.setState({
+      elements: newArray,
+    });
+    console.log('done');
+    // newArray.splice(index, 1);
+    // newArray.push({ id, element });
+    // this.setState({
+    //   elements: newArray,
+    // });
+    // console.log(this.state.elements);
+  };
+
   setSelected = id => {
     let tempArr = this.state.elements;
     let active = tempArr.filter(cur => cur.id === id)[0];
+    console.log(active);
     let index = tempArr.indexOf(active);
     let element = tempArr[index];
     if (element) {
@@ -81,6 +100,7 @@ export class App extends Component {
               setSelected={this.setSelected}
               selected={this.state.selected}
               removeSelection={this.removeSelection}
+              updateElement={this.updateElement}
             />
           )}
         />
