@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import "../scss/main.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-export class IconGenerator extends Component {
+
+export class ListItem extends Component {
   dragStart = (e) => {
     const target = e.target;
     e.dataTransfer.setData("card_id", target.id);
@@ -17,8 +16,8 @@ export class IconGenerator extends Component {
   dragover = (e) => {
     e.stopPropagation();
   };
-  getIconStyle = () => {
-    const icn = this.props.styles;
+  getStyles = () => {
+    const lst = this.props.styles;
     const style = {};
     const properties = [
       "width",
@@ -30,39 +29,29 @@ export class IconGenerator extends Component {
       "position",
     ];
     for (const property of properties) {
-      style[property] = icn[property];
+      style[property] = lst[property];
     }
     return style;
   };
   render() {
     console.log(this.props);
-    console.log(this.props.key);
-    // console.log(this.props.styles.position);
+    // console.log(this.props.key);
     console.log(this.props.styles);
-    const name = this.props.styles.aid.split("!")[0];
+    // console.log(this.props.styles.position);
     return (
-      <button
-        className="SocialIcons"
+      <div
+        className="listitem"
+        style={this.getStyles()}
+        id={this.props.styles.aid}
         draggable="true"
         onDragStart={this.dragStart}
-        onDragOver={this.dragOver}
-        id={this.props.styles.aid}
-        style={this.getIconStyle()}
+        onDragOver={this.dragover}
         onContextMenu={this.handleContextMenu}
-        // toggle={this.props.styles.aid}
       >
-        <FontAwesomeIcon
-          icon={["fab", name]}
-          size="5x"
-          style={{
-            color: this.props.styles.color,
-          }}
-        >
-          {this.props.key}
-        </FontAwesomeIcon>
-      </button>
+        <li ><input/></li>
+      </div>
     );
   }
 }
 
-export default IconGenerator;
+export default ListItem;
