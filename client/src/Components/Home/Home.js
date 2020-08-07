@@ -7,6 +7,7 @@ import IconGenerator from "../IconGenerator";
 import "../../scss/main.scss";
 import DarkNav from "./DarkNavBar";
 import ContactUsForm from "./contactUs";
+import ListItem from "../ListItem";
 
 library.add(fab);
 function Home() {
@@ -82,6 +83,11 @@ function Home() {
         // position: "initial",
         color: "blue",
       },
+      list: {
+        position: "absolute",
+        width: "800px",
+        height: "80px",
+      },
     };
     return properties[type];
   };
@@ -122,6 +128,7 @@ function Home() {
         <ContactUsForm key={index} styles={element} toggle={toggleModal} />
       ),
       icon: <IconGenerator key={index} styles={element} toggle={toggleModal} />,
+      list: <ListItem key={index} styles={element} toggle={toggleModal} />,
     };
     return components[type];
   };
@@ -159,6 +166,7 @@ function Home() {
           "icons"
         )}
         {showIcons && <Icons btn={setProperties} />}
+        {renderSidebarButton("#fff", "30px", "list"+Date.now(), "list item", "list")}
       </aside>
       <div className="modal" id="add-modal">
         <div className="modal__content">
