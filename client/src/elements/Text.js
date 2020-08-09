@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import ContextMenu from './../Components/ContextMenu';
+import React, { useState } from 'react';
 
 const Button = ({
   text,

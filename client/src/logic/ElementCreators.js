@@ -57,6 +57,7 @@ export const createButton = (config, functions) => {
     selected,
     backgroundColor,
     textColor,
+    borderRadius,
   } = config;
 
   const {
@@ -94,6 +95,7 @@ export const createButton = (config, functions) => {
         selected={selected}
         backgroundColor={backgroundColor}
         textColor={textColor}
+        borderRadius={borderRadius}
         type="button"
       />
     ),

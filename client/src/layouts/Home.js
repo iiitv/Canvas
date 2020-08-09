@@ -1,35 +1,20 @@
-import React, { useState, Fragment, useEffect } from 'react';
-import Sidebar from '../Components/Sidebar';
-import uniqid from 'uniqid';
+import React, { Fragment } from 'react';
 import { createButton, createText } from './../logic/ElementCreators';
 
-import Button from '../elements/Button';
-import Text from '../elements/Text';
+import Sidebar from '../Components/Sidebar';
 import Properties from '../Components/Properties';
 
 const Home = ({
   elements,
   addElement,
+  selected,
   removeElement,
   setModalOpen,
-  selected,
   setSelected,
   updateElement,
   removeSelection,
+  getElementFromId,
 }) => {
-  /*
-  
-  const { text, position, height, width, allowContextMenu } = config;
-
-  const {
-    setModalOpen,
-    removeElement,
-    setSelected,
-    removeSelected,
-    addElement,
-  } = functions;
-*/
-
   const addButton = position => {
     const buttonConfig = {
       text: 'Button',
@@ -39,6 +24,7 @@ const Home = ({
       allowContextMenu: true,
       backgroundColor: '#ccc',
       textColor: '#000',
+      borderRadius: '5px',
     };
 
     const buttonFunctions = {
@@ -77,7 +63,11 @@ const Home = ({
     <div className="home">
       <Sidebar />
       {selected ? (
-        <Properties updateElement={updateElement} selected={selected} />
+        <Properties
+          updateElement={updateElement}
+          selectedElement={selected}
+          getElementFromId={getElementFromId}
+        />
       ) : null}
       <div
         className="home__canvas"

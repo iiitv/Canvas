@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ContextMenu from './../Components/ContextMenu';
-import addResizeEvent, {
-  unbind as removeResizeEvent,
-} from 'element-resize-event';
+import addResizeEvent from 'element-resize-event';
 import { throttle } from 'lodash';
 
 const Button = ({
@@ -15,32 +12,18 @@ const Button = ({
   showContextMenu,
   backgroundColor,
   textColor,
+  borderRadius,
 }) => {
   const [styles, setStyles] = useState({
     position: 'absolute',
-    width: width,
-    height: height,
+    width,
+    height,
     top: `calc(${position.y}px)`,
     left: `calc(${position.x}px - 30rem)`,
     minWidth: '4rem',
     maxWidth: '100rem',
+    borderRadius,
   });
-
-  console.log(backgroundColor);
-
-  useEffect(() => {
-    const target = document.querySelector(`#btn-${id}`);
-    const resizeFunction = throttle(() => {
-      let el = document.querySelector(`#btn-${id}`);
-      let newStyles = {
-        ...styles,
-        top: `calc(${el.clientY}px) - ${el.clientHeight / 2}px`,
-        left: `calc(${el.clientX}px - 30rem - ${el.clientWidth / 2}px)`,
-      };
-      setStyles(newStyles);
-    }, 100);
-    addResizeEvent(target, resizeFunction);
-  }, []);
 
   const setCoordinates = e => {
     let width = e.target.clientWidth;
@@ -56,7 +39,7 @@ const Button = ({
 
   return (
     <button
-      style={{ ...styles, backgroundColor, color: textColor }}
+      style={{ ...styles, backgroundColor, color: textColor, borderRadius }}
       className="btn"
       draggable="true"
       onDrag={setCoordinates}

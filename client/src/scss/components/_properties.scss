@@ -67,4 +67,31 @@
       }
     }
   }
+
+  &__tabs {
+    background-color: #eee;
+    width: 100%;
+    height: 5rem;
+    display: flex;
+  }
+
+  &__tab {
+    background-color: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    i {
+      font-size: 2rem;
+    }
+    span {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__rangeinput {
+    width: 100%;
+  }
 }

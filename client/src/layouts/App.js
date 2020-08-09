@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import { Route, BrowserRouter } from 'react-router-dom';
 import Home from './Home';
 import '../scss/main.scss';
 
@@ -35,13 +35,6 @@ export class App extends Component {
     this.setState({
       elements: newArray,
     });
-    console.log('done');
-    // newArray.splice(index, 1);
-    // newArray.push({ id, element });
-    // this.setState({
-    //   elements: newArray,
-    // });
-    // console.log(this.state.elements);
   };
 
   setSelected = id => {
@@ -86,6 +79,11 @@ export class App extends Component {
     });
   };
 
+  getElementFromId = id => {
+    let active = this.state.elements.filter(cur => cur.id === id)[0];
+    return active;
+  };
+
   render() {
     return (
       <BrowserRouter>
@@ -101,6 +99,7 @@ export class App extends Component {
               selected={this.state.selected}
               removeSelection={this.removeSelection}
               updateElement={this.updateElement}
+              getElementFromId={this.getElementFromId}
             />
           )}
         />
