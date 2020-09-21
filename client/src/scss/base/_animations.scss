@@ -42,3 +42,17 @@
     transform: translate(0);
   }
 }
+
+@keyframes bounceIn {
+  from {
+    transform: scale(0);
+  }
+
+  60% {
+    transform: scale(1.2);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}

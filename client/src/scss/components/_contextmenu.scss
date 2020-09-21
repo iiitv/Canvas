@@ -1,0 +1,169 @@
+.context-menu {
+  position: absolute;
+  background-color: #fff;
+  width: 15rem;
+  height: 9rem;
+  border-radius: 10px;
+  z-index: 2;
+  padding: 1rem;
+  text-align: center;
+}
+
+.context-menu-wrapper {
+  position: relative;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+
+.context-menu-btn {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 1rem;
+  background-color: #eee;
+  width: 100%;
+  transition: all 0.2s ease-out;
+  border-radius: 7px;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  color: #2d3436;
+}
+
+.context-menu-btn > p {
+  font-size: 10rem;
+  text-align: left;
+  text-align: center;
+}
+
+.context-menu-btn:not(:last-child) {
+  margin-bottom: 3px;
+}
+
+.context-menu-btn:hover {
+  background-color: #ccc;
+}
+
+.context-menu-pure {
+  border-radius: 5px;
+  position: absolute;
+  width: 20rem;
+  margin: 0;
+  overflow: hidden;
+  background: #fff;
+  z-index: 100;
+  -webkit-box-shadow: 0.5rem 1rem 10rem rgba(10, 0, 0, 0.2);
+  box-shadow: 0.5rem 1rem 10rem rgba(10, 0, 0, 0.2);
+  opacity: 0;
+  -webkit-transform: translate(0, 15px) scale(0.95);
+  transform: translate(0, 15px) scale(0.95);
+  -webkit-transition: opacity 0.1s ease-out, -webkit-transform 0.1s ease-out;
+  transition: opacity 0.1s ease-out, -webkit-transform 0.1s ease-out;
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out,
+    -webkit-transform 0.1s ease-out;
+  pointer-events: none;
+}
+
+.context-menu-pure-item {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  white-space: nowrap;
+  border-radius: 5px;
+}
+
+.context-menu-pure-btn {
+  background: none;
+  line-height: normal;
+  overflow: visible;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  display: block;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 0 2rem;
+  padding-bottom: 0.3rem;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.context-menu-pure-btn:active {
+  transform: translate(0);
+}
+
+.context-menu-pure-btn::-moz-focus-inner,
+.context-menu-pure-btn::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+.context-menu-pure-icon {
+  color: #2d3436;
+  font-size: 1.7rem;
+}
+
+.context-menu-pure-text {
+  color: #2d3436;
+  font-size: 1.7rem;
+  margin: auto 0;
+}
+
+.context-menu-pure-item:hover {
+  color: #2d3436;
+  outline: none;
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.context-menu-pure-item:active {
+  transform: translate(0);
+  background-color: #ccc;
+}
+
+.context-menu-pure-item.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.context-menu-pure-item.disabled .context-menu-pure-btn {
+  cursor: not-allowed;
+}
+
+.context-menu-pure-separator {
+  display: block;
+  margin: 7px 5px;
+  height: 1px;
+  background-color: #aaa;
+}
+
+.context-menu-pure-item.subcontext-menu-pure::after {
+  content: '';
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.context-menu-pure .context-menu-pure {
+  top: 4px;
+  left: 99%;
+}
+
+.show-context-menu-pure,
+.context-menu-pure-item:hover > .context-menu-pure {
+  opacity: 1;
+  -webkit-transform: translate(0, 0) scale(1);
+  transform: translate(0, 0) scale(1);
+  pointer-events: auto;
+}
+
+.context-menu-pure-item:hover > .context-menu-pure {
+  -webkit-transition-delay: 100ms;
+  transition-delay: 300ms;
+}
