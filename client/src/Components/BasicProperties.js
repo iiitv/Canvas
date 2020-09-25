@@ -6,18 +6,24 @@ const BasicProperties = ({
   defaultText,
   selectedType,
   defaultBorderRadius,
+  defaultFontSize,
+  defaultFontWeight,
 }) => {
   const [text, setText] = useState(defaultText);
   const [textPicker, setTextPicker] = useState(false);
   const [backgroundPicker, setBackgroundPicker] = useState(false);
   const [borderRadius, setBorderRadius] = useState(defaultBorderRadius);
-
+  const [fontSize, setFontSize] = useState(defaultFontSize);
+  const [fontWeight, setFontWeight] = useState(defaultFontWeight);
+  console.log(fontSize);
   useEffect(() => {
     updateSelectedElement({
       text,
+      fontSize,
+      fontWeight,
       borderRadius: selectedType !== 'text' ? `${borderRadius}px` : '5px',
     });
-  }, [text, borderRadius]);
+  }, [text, borderRadius, fontSize, fontWeight]);
 
   return (
     <div
@@ -42,6 +48,25 @@ const BasicProperties = ({
           type="text"
           defaultValue={defaultText}
           onChange={e => setText(e.target.value)}
+        />
+      </div>
+      <div className="properties__section">
+        <div className="properties__label">Font size</div>
+        <input
+          className="properties__textinput"
+          type="text"
+          defaultValue={defaultFontSize}
+          onChange={e => setFontSize(e.target.value)}
+        />
+      </div>
+      <div className="properties__section">
+        <div className="properties__label">Font weight</div>
+        {console.log(defaultFontWeight)}
+        <input
+          className="properties__textinput"
+          type="text"
+          defaultValue={defaultFontWeight}
+          onChange={e => setFontWeight(e.target.value)}
         />
       </div>
       <div className="properties__section">

@@ -38,6 +38,7 @@ const Properties = ({ selectedElement, updateElement, getElementFromId }) => {
         ...element.props,
         ...values,
       });
+      console.log('updated element', updatedElement);
       updateElement(id, updatedElement);
       setSelected({ id, element: updatedElement });
     }
@@ -71,6 +72,8 @@ const Properties = ({ selectedElement, updateElement, getElementFromId }) => {
             defaultTextColor={selected.element.props.textColor}
             selectedType={selected.element.props.type}
             defaultBorderRadius={selected.element.props.borderRadius}
+            defaultFontSize={selected.element.props.fontSize}
+            defaultFontWeight={selected.element.props.fontWeight}
           />
         )}
         {tab === 'color' && (

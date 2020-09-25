@@ -22,6 +22,8 @@ const Home = ({
       height: 'auto',
       width: 'auto',
       allowContextMenu: true,
+      fontSize: '24px',
+      fontWeight: '400',
       backgroundColor: '#ccc',
       textColor: '#000',
       borderRadius: '5px',
@@ -46,6 +48,8 @@ const Home = ({
       allowContextMenu: true,
       backgroundColor: 'transparent',
       textColor: '#000',
+      fontSize: '16px',
+      fontWeight: '400',
     };
 
     const textFunctions = {
@@ -80,7 +84,7 @@ const Home = ({
         onDrop={e => {
           e.preventDefault();
           let type = e.dataTransfer.getData('type');
-          console.log(e.clientX, e.clientY);
+          // console.log(e.clientX, e.clientY);
           let dropCoords = { x: e.clientX, y: e.clientY };
           if (type === 'button') {
             addButton(dropCoords);
