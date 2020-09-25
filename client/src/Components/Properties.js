@@ -9,9 +9,7 @@ const Properties = ({ selectedElement, updateElement, getElementFromId }) => {
   let id = selected.id;
   let element = selected.element;
 
-  useEffect(() => {
-    console.log('updated');
-  }, [selected.element.props.text]);
+  useEffect(() => {}, [selected.element.props.text]);
 
   useEffect(() => {
     document.querySelectorAll('.properties__tab').forEach(cur => {
@@ -38,11 +36,9 @@ const Properties = ({ selectedElement, updateElement, getElementFromId }) => {
         ...element.props,
         ...values,
       });
-      console.log('updated element', updatedElement);
       updateElement(id, updatedElement);
       setSelected({ id, element: updatedElement });
     }
-    console.log(getElementFromId(id));
   };
 
   return (

@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { throttle } from 'lodash';
-
 const BasicProperties = ({
   updateSelectedElement,
   defaultText,
@@ -15,7 +13,6 @@ const BasicProperties = ({
   const [borderRadius, setBorderRadius] = useState(defaultBorderRadius);
   const [fontSize, setFontSize] = useState(defaultFontSize);
   const [fontWeight, setFontWeight] = useState(defaultFontWeight);
-  console.log(fontSize);
   useEffect(() => {
     updateSelectedElement({
       text,
@@ -61,7 +58,6 @@ const BasicProperties = ({
       </div>
       <div className="properties__section">
         <div className="properties__label">Font weight</div>
-        {console.log(defaultFontWeight)}
         <input
           className="properties__textinput"
           type="text"

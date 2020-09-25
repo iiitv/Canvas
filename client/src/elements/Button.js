@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import addResizeEvent from 'element-resize-event';
-import { throttle } from 'lodash';
-
+import React, { useState } from 'react';
 const Button = ({
   text,
   position,

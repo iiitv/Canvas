@@ -7,7 +7,6 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "element-resize-event": "^3.0.3",
-    "lodash": "^4.17.19",
     "node": "^14.2.0",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
