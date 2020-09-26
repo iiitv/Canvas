@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Button = ({
+const Text = ({
   text,
   position,
   height,
@@ -8,6 +8,8 @@ const Button = ({
   id,
   setSelected,
   showContextMenu,
+  fontSize,
+  fontWeight,
   textColor,
   backgroundColor,
 }) => {
@@ -33,7 +35,13 @@ const Button = ({
 
   return (
     <span
-      style={{ ...styles, backgroundColor, color: textColor }}
+      style={{
+        ...styles,
+        backgroundColor,
+        color: textColor,
+        fontSize,
+        fontWeight,
+      }}
       className="text"
       draggable="true"
       onDrag={setCoordinates}
@@ -47,4 +55,4 @@ const Button = ({
   );
 };
 
-export default Button;
+export default Text;

@@ -30,7 +30,6 @@ export class App extends Component {
     let newArray = this.state.elements;
     let active = newArray.filter(cur => cur.id === id)[0];
     let index = newArray.indexOf(active);
-    console.log(active);
     newArray.splice(index, 1, { id, element });
     this.setState({
       elements: newArray,
@@ -40,14 +39,12 @@ export class App extends Component {
   setSelected = id => {
     let tempArr = this.state.elements;
     let active = tempArr.filter(cur => cur.id === id)[0];
-    console.log(active);
     let index = tempArr.indexOf(active);
     let element = tempArr[index];
     if (element) {
       this.setState({
         selected: element,
       });
-      console.log(element);
     } else {
       console.log('not selecting');
     }

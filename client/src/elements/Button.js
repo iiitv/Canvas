@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import addResizeEvent from 'element-resize-event';
-import { throttle } from 'lodash';
-
+import React, { useState } from 'react';
 const Button = ({
   text,
   position,
@@ -11,6 +8,8 @@ const Button = ({
   setSelected,
   showContextMenu,
   backgroundColor,
+  fontSize,
+  fontWeight,
   textColor,
   borderRadius,
 }) => {
@@ -39,7 +38,14 @@ const Button = ({
 
   return (
     <button
-      style={{ ...styles, backgroundColor, color: textColor, borderRadius }}
+      style={{
+        ...styles,
+        backgroundColor,
+        color: textColor,
+        borderRadius,
+        fontSize,
+        fontWeight,
+      }}
       className="btn"
       draggable="true"
       onDrag={setCoordinates}

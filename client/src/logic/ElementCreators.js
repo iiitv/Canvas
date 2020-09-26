@@ -55,6 +55,8 @@ export const createButton = (config, functions) => {
     width,
     allowContextMenu,
     selected,
+    fontSize,
+    fontWeight,
     backgroundColor,
     textColor,
     borderRadius,
@@ -95,6 +97,8 @@ export const createButton = (config, functions) => {
         selected={selected}
         backgroundColor={backgroundColor}
         textColor={textColor}
+        fontSize={fontSize}
+        fontWeight={fontWeight}
         borderRadius={borderRadius}
         type="button"
       />
@@ -113,6 +117,8 @@ export const createText = (config, functions) => {
     allowContextMenu,
     textColor,
     backgroundColor,
+    fontSize,
+    fontWeight,
   } = config;
 
   const {
@@ -146,6 +152,8 @@ export const createText = (config, functions) => {
         showContextMenu={showContextMenu}
         backgroundColor={backgroundColor}
         textColor={textColor}
+        fontSize={fontSize}
+        fontWeight={fontWeight}
         type="text"
       />
     ),

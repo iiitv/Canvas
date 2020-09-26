@@ -9,9 +9,7 @@ const Properties = ({ selectedElement, updateElement, getElementFromId }) => {
   let id = selected.id;
   let element = selected.element;
 
-  useEffect(() => {
-    console.log('updated');
-  }, [selected.element.props.text]);
+  useEffect(() => {}, [selected.element.props.text]);
 
   useEffect(() => {
     document.querySelectorAll('.properties__tab').forEach(cur => {
@@ -41,7 +39,6 @@ const Properties = ({ selectedElement, updateElement, getElementFromId }) => {
       updateElement(id, updatedElement);
       setSelected({ id, element: updatedElement });
     }
-    console.log(getElementFromId(id));
   };
 
   return (
@@ -71,6 +68,8 @@ const Properties = ({ selectedElement, updateElement, getElementFromId }) => {
             defaultTextColor={selected.element.props.textColor}
             selectedType={selected.element.props.type}
             defaultBorderRadius={selected.element.props.borderRadius}
+            defaultFontSize={selected.element.props.fontSize}
+            defaultFontWeight={selected.element.props.fontWeight}
           />
         )}
         {tab === 'color' && (
