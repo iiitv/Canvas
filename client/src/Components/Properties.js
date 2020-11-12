@@ -12,7 +12,6 @@ const Properties = ({ selectedElement, updateElement, getElementFromId, addFont,
   let id = selected.id;
   let element = selected.element;
 
-//TODO: When not in transform tab, cannot resize, can drag. Transform also includes rotation, width, height increase, move border-radius to transform tab.
 
   useEffect(() => {
     console.log('updated');
