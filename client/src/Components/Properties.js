@@ -4,7 +4,7 @@ import ColorProperties from './ColorProperties';
 import TransformProperties from './TransformProperties';
 
 
-const Properties = ({ selectedElement, updateElement, getElementFromId, addFont, fontsList }) => {
+const Properties = ({ selectedElement, updateElement, getElementFromId, addFont, fontsList, updateAll }) => {
   const [tab, setTab] = useState('transform');
   const [selected, setSelected] = useState(selectedElement);
   const [resizing, setResizing] = useState(selectedElement.resizing)
@@ -12,6 +12,10 @@ const Properties = ({ selectedElement, updateElement, getElementFromId, addFont,
   let id = selected.id;
   let element = selected.element;
 
+  const toggleResizing = (isResizing) => {
+    updateSelectedElement({ resizing: isResizing })
+    setResizing(isResizing);
+  }
 
   useEffect(() => {
     console.log('updated');
@@ -28,6 +32,10 @@ const Properties = ({ selectedElement, updateElement, getElementFromId, addFont,
         cur.style.backgroundColor = '#eee';
       }
     });
+
+    if (tab !=='transform') {
+      toggleResizing(false)
+    }
   }, [tab]);
 
   useEffect(() => {
@@ -49,10 +57,7 @@ const Properties = ({ selectedElement, updateElement, getElementFromId, addFont,
     console.log(getElementFromId(id));
   };
 
-  const toggleResizing = (isResizing) => {
-    updateSelectedElement({ resizing: isResizing })
-    setResizing(isResizing);
-  }
+  
 
   return (
     <div className="properties">

@@ -88,6 +88,7 @@ const Home = ({
           getElementFromId={getElementFromId}
           addFont={addFont}
           fontsList={fontsList}
+          updateAll={updateAll}
         />
       ) : null}
       <div
