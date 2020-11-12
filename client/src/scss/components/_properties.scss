@@ -185,17 +185,8 @@
   }
 }
 
-div.properties__dropdown::-webkit-scrollbar-track {
-  background: red;
-  display: none;
-}
-
 #properties-dropdown::-webkit-scrollbar {
-  width: 5px;
-}
-#properties-dropdown::-webkit-scrollbar-thumb {
-  background: #999;
-  border-radius: 100px;
+  display: none;
 }
 
 .circle-icon {

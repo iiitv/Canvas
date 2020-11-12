@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FixedSizeList as List } from 'react-window'
 
 const BasicProperties = ({
   updateSelectedElement,
@@ -15,6 +16,7 @@ const BasicProperties = ({
   const [fontFamilyDropdownOpen, setFontFamilyDropdownOpen] = useState(false)
 
   const [fontFamily, setFontFamily] = useState(defaultFontFamily)
+  const [current, setCurrent] = useState(fontsList.slice(0, 20))
 
   useEffect(() => {
     updateSelectedElement({
@@ -24,6 +26,16 @@ const BasicProperties = ({
 
     });
   }, [text, fontWeight, fontFamily]);
+
+
+  
+  const fetchMoreFonts = () => {
+    setTimeout(() => {
+      console.log(fontsList.slice(current.length + 1, current.length + 21))
+      console.log(current.length);
+    }, 1000)
+    console.log('fetching')
+  }
 
   return (
     <div
@@ -59,12 +71,36 @@ const BasicProperties = ({
           <div id="properties-dropdown" className={`properties__dropdown ${fontFamilyDropdownOpen ? 'properties__dropdown__open' : ''}`}
         >
             
-            {fontsList.map(cur => (
-              <div className="properties__dropdown__item" onClick={(e) =>  {
-                setFontFamily(e.target.dataset.value)
-          addFont({font: e.target.dataset.value, weights: [400]})
-              }} data-value={cur}>{cur}</div>
+            <List
+            className="font-families-list"
+            height={200}
+            itemCount={fontsList.length}
+            width={200}
+            itemSize={30}
+            >
+              {
+                ({index, style}) => (
+                  <div style={style} key={index} className="properties__dropdown__item" onClick={() => {
+                    setFontFamily(fontsList[index])
+                    addFont({ font: fontsList[index], weights: [400] })
+                  }}>
+                  {fontsList[index]}
+                  </div>
+                )
+              }
+            </List>
+
+            {/*
+{current.map((cur, index) => (
+
+              <div key={index} className="properties__dropdown__item" onClick={(e) =>  {
+                setFontFamily(cur)
+          addFont({font: cur, weights: [400]})
+              }}>{cur}</div>
             ))}
+
+            */}
+            
           </div>
         </div>
 
@@ -85,8 +121,8 @@ const BasicProperties = ({
             }
           }}>
             
-            {[100, 300, 400, 500, 600, 800, 900].map(cur => (
-              <div className="properties__dropdown__item" data-value={cur}>{cur}</div>
+            {[100, 300, 400, 500, 600, 800, 900].map((cur, index) => (
+              <div className="properties__dropdown__item" key={index} data-value={cur}>{cur}</div>
             ))}
           </div>
         </div>

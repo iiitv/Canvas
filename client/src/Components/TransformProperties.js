@@ -28,7 +28,7 @@ const TransformProperties = ({
         <div className="properties__label">Resizing</div>
         <button className={`properties__btn properties__resize-btn ${resizing ? 'properties__resize-btn--active' : ''}`} onClick={() => toggleResizing(!resizing)}>
           <i className="fa fa-icon fa-arrows-alt properties__btn__logo"></i>
-          <span>Start Resizing</span>
+          <span>{resizing ? 'Stop Resizing' : 'Start Resizing'}</span>
         </button>
       </div>
       <div className="properties__section">
