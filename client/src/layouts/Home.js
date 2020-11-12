@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { createButton, createText } from './../logic/ElementCreators';
 
 import Sidebar from '../Components/Sidebar';
@@ -14,7 +14,20 @@ const Home = ({
   updateElement,
   removeSelection,
   getElementFromId,
+  updateAll,
+  addFont,
+  fontsList
 }) => {
+
+
+  useEffect(() => {
+    if (!selected) {
+      updateAll({
+        resizing: false
+      })
+    }
+  }, [selected])
+  
   const addButton = position => {
     const buttonConfig = {
       text: 'Button',
@@ -25,6 +38,9 @@ const Home = ({
       backgroundColor: '#ccc',
       textColor: '#000',
       borderRadius: '5px',
+      fontWeight: 400,
+      resizing: false,
+      fontFamily: 'sans-serif'
     };
 
     const buttonFunctions = {
@@ -46,6 +62,9 @@ const Home = ({
       allowContextMenu: true,
       backgroundColor: 'transparent',
       textColor: '#000',
+      fontWeight: 400,
+      resizing: false,
+      fontFamily: 'sans-serif'
     };
 
     const textFunctions = {
@@ -67,6 +86,8 @@ const Home = ({
           updateElement={updateElement}
           selectedElement={selected}
           getElementFromId={getElementFromId}
+          addFont={addFont}
+          fontsList={fontsList}
         />
       ) : null}
       <div

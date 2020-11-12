@@ -1,16 +1,22 @@
 import React, { cloneElement, useEffect, useState } from 'react';
-import BasicProperties from './BasicProperties';
+import TextProperties from './TextProperties';
 import ColorProperties from './ColorProperties';
+import TransformProperties from './TransformProperties';
 
-const Properties = ({ selectedElement, updateElement, getElementFromId }) => {
-  const [tab, setTab] = useState('basic');
+
+const Properties = ({ selectedElement, updateElement, getElementFromId, addFont, fontsList }) => {
+  const [tab, setTab] = useState('transform');
   const [selected, setSelected] = useState(selectedElement);
+  const [resizing, setResizing] = useState(selectedElement.resizing)
 
   let id = selected.id;
   let element = selected.element;
 
+//TODO: When not in transform tab, cannot resize, can drag. Transform also includes rotation, width, height increase, move border-radius to transform tab.
+
   useEffect(() => {
     console.log('updated');
+    console.log(selected.element.props.fontWeight)
   }, [selected.element.props.text]);
 
   useEffect(() => {
@@ -44,15 +50,27 @@ const Properties = ({ selectedElement, updateElement, getElementFromId }) => {
     console.log(getElementFromId(id));
   };
 
+  const toggleResizing = (isResizing) => {
+    updateSelectedElement({ resizing: isResizing })
+    setResizing(isResizing);
+  }
+
   return (
     <div className="properties">
       <div className="properties__tabs">
         <div
-          className="properties__tab properties__tab--basic"
-          onClick={() => setTab('basic')}
+          className="properties__tab properties__tab--transform"
+          onClick={() => setTab('transform')}
         >
           <i className="fa fa-icon fa-ruler-horizontal"></i>
-          <span>Basic</span>
+          <span>Transform</span>
+        </div>
+        <div
+          className="properties__tab properties__tab--text"
+          onClick={() => setTab('text')}
+        >
+          <i className="fa fa-icon fa-font"></i>
+          <span>Text</span>
         </div>
         <div
           className="properties__tab properties__tab--color"
@@ -63,25 +81,37 @@ const Properties = ({ selectedElement, updateElement, getElementFromId }) => {
         </div>
       </div>
       <div className="properties__content">
-        {tab === 'basic' && (
-          <BasicProperties
+      {tab === 'transform' && (
+          <TransformProperties
+            updateSelectedElement={updateSelectedElement}
+            selectedType={selected.element.props.type}
+            defaultBorderRadius={selected.element.props.borderRadius}
+            toggleResizing={toggleResizing}
+            resizing={resizing}
+          />
+        )}
+        {tab === 'text' && (
+          <TextProperties
             updateSelectedElement={updateSelectedElement}
             defaultBackgroundColor={selected.element.props.backgroundColor}
             defaultText={selected.element.props.text}
             defaultTextColor={selected.element.props.textColor}
             selectedType={selected.element.props.type}
-            defaultBorderRadius={selected.element.props.borderRadius}
+            defaultFontWeight={selected.element.props.fontWeight}
+            defaultFontFamily={selected.element.props.fontFamily}
+            addFont={addFont}
+            fontsList={fontsList}
           />
         )}
         {tab === 'color' && (
           <ColorProperties
             updateSelectedElement={updateSelectedElement}
             defaultBackgroundColor={selected.element.props.backgroundColor}
-            defaultText={selected.element.props.text}
             defaultTextColor={selected.element.props.textColor}
             selectedType={selected.element.props.type}
           />
         )}
+        
       </div>
     </div>
   );

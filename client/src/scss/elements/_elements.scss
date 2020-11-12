@@ -4,13 +4,54 @@
   border-radius: 5px;
   font-size: 2rem;
   cursor: pointer;
-  resize: both;
+  display: flex;
   text-align: center;
-  overflow: hidden;
+  height: auto;
+  width: auto;
+  span {
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }
 
 .text {
   font-size: 3rem;
   cursor: pointer;
   text-align: center;
+  display: flex;
+  align-items: center;
+  span {
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.resize-handle {
+  &__topbottom {
+    width: 20px;
+    height: 8px;
+    background-color: #54a0ff;
+    border-radius: 3px;
+  }
+
+  &__sides {
+    width: 8px;
+    height: 20px;
+
+    background-color: #54a0ff;
+    border-radius: 3px;
+  }
+
+  &__corners {
+    width: 10px;
+    height: 10px;
+    border-radius: 100px;
+    background-color: #54a0ff;
+  }
 }

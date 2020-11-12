@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import {Resizable} from 're-resizable'
+import resizeHandles from './../Components/ResizeHandles'
 
 const Button = ({
   text,
@@ -10,6 +12,9 @@ const Button = ({
   showContextMenu,
   textColor,
   backgroundColor,
+  fontWeight,
+  resizing,
+  fontFamily
 }) => {
   const [styles, setStyles] = useState({
     position: 'absolute',
@@ -32,18 +37,35 @@ const Button = ({
   };
 
   return (
-    <span
-      style={{ ...styles, backgroundColor, color: textColor }}
-      className="text"
-      draggable="true"
-      onDrag={setCoordinates}
-      onDragStart={e => e.dataTransfer.setDragImage(new Image(), 0, 0)}
-      onContextMenu={showContextMenu}
-      onDoubleClick={() => setSelected(id)}
-      id={id}
+    <Resizable defaultSize={{
+      width: 100,
+      height: 50
+    }} style={{ ...styles, backgroundColor, color: textColor, fontWeight, fontFamily}}
+    className="text"
+      id={`text-${id}`}
+      draggable={!resizing}
+    enable={{
+      top:resizing, right:resizing, bottom:resizing, left:resizing, topRight:resizing, bottomRight:resizing, bottomLeft:resizing, topLeft:resizing
+    }}
+    onDoubleClick={() =>
+      setSelected(id)
+    }
+    onResizeStop={() => {
+
+    }}
+    onContextMenu={showContextMenu}
+    onDrag={(e) => {
+      if (resizing) return;
+      setCoordinates(e)
+    }}
+    onDragStart={e => {
+      if (resizing) return;
+      e.dataTransfer.setDragImage(new Image(), 0, 0)
+    }}
+    handleComponent={resizeHandles}
     >
-      {text}
-    </span>
+    {text}
+    </Resizable>
   );
 };
 
