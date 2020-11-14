@@ -149,10 +149,38 @@
         background-color: #ccc;
         cursor: pointer;
       }
+
+      &--disabled {
+        &:hover {
+          background-color: #fff;
+          cursor: auto;
+        }
+        color: #555;
+      }
     }
 
-    &__open {
+    &--open {
       transform: scale(1);
+    }
+
+    &__searchbar {
+      padding: 1rem 2rem;
+      width: 100%;
+      height: 100%;
+
+      input {
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: #555;
+      }
+
+      &__divider {
+        background-color: #ccc;
+        width: 90%;
+        border-radius: 100px;
+        height: 2px;
+        margin: 0 auto;
+      }
     }
   }
 

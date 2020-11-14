@@ -38,9 +38,9 @@ const Button = ({
 
   return (
     <Resizable defaultSize={{
-      width: 100,
-      height: 50
-    }} style={{ ...styles, backgroundColor, color: textColor, fontWeight, fontFamily}}
+      width: 'auto',
+      height: 'auto'
+    }} style={{ ...styles, backgroundColor, color: textColor, fontWeight, fontFamily, fontWeight}}
     className="text"
       id={`text-${id}`}
       draggable={!resizing}

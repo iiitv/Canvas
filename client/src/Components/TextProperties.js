@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FixedSizeList as List } from 'react-window'
+import Dropdown from './Dropdown'
 
 const BasicProperties = ({
   updateSelectedElement,
@@ -16,7 +16,6 @@ const BasicProperties = ({
   const [fontFamilyDropdownOpen, setFontFamilyDropdownOpen] = useState(false)
 
   const [fontFamily, setFontFamily] = useState(defaultFontFamily)
-  const [current, setCurrent] = useState(fontsList.slice(0, 20))
 
   useEffect(() => {
     updateSelectedElement({
@@ -28,14 +27,6 @@ const BasicProperties = ({
   }, [text, fontWeight, fontFamily]);
 
 
-  
-  const fetchMoreFonts = () => {
-    setTimeout(() => {
-      console.log(fontsList.slice(current.length + 1, current.length + 21))
-      console.log(current.length);
-    }, 1000)
-    console.log('fetching')
-  }
 
   return (
     <div
@@ -48,8 +39,11 @@ const BasicProperties = ({
           Array.from(a.classList, cur => els.push(cur));
           a = a.parentNode;
         }
-        if (fontWeightDropdownOpen) setFontWeightDropdownOpen(false);
-        if (fontFamilyDropdownOpen) setFontFamilyDropdownOpen(false);
+        if (!els.filter(el => el === 'properties__dropdown-wrapper')[0]) {
+          setFontFamilyDropdownOpen(false);
+          setFontWeightDropdownOpen(false);
+          document.querySelectorAll('.properties__dropdown__searchbar > input').forEach(cur => cur.value = '');
+        }
 
       }}
     >
@@ -65,51 +59,49 @@ const BasicProperties = ({
 
       <div className="properties__section">
         <div className="properties__label">Font Family</div>
+        <Dropdown
+        arr={fontsList}
+        isOpen={fontFamilyDropdownOpen}
+        setIsOpen={setFontFamilyDropdownOpen}
+        config={{
+          title: 'Select Font',
+          searchable: true,
+          windowing: true,
+          searchPlaceholder: 'Search Font',
+          itemConfig: {
+            height: 300,
+            width: 300,
+            size: 30,
+            action: (val) => {
+              setFontFamily(val)
+              addFont({ font: val, weights: [400] })
+            }
+          }
+        }
+        } />
+      </div>
         
-        <div className="properties__dropdown-wrapper">
-            <button className="properties__dropdown-trigger" onClick={() => setFontFamilyDropdownOpen(true)}>{fontFamily ? fontFamily : 'Select Font'}</button>
-          <div id="properties-dropdown" className={`properties__dropdown ${fontFamilyDropdownOpen ? 'properties__dropdown__open' : ''}`}
-        >
-            
-            <List
-            className="font-families-list"
-            height={200}
-            itemCount={fontsList.length}
-            width={200}
-            itemSize={30}
-            >
-              {
-                ({index, style}) => (
-                  <div style={style} key={index} className="properties__dropdown__item" onClick={() => {
-                    setFontFamily(fontsList[index])
-                    addFont({ font: fontsList[index], weights: [400] })
-                  }}>
-                  {fontsList[index]}
-                  </div>
-                )
+      <div className="properties__section"  style={{ marginTop: fontFamilyDropdownOpen ? '13rem' : 'auto' }}>
+        <div className="properties__label">Font Weight</div>
+        <Dropdown
+          arr={[300, 400, 500, 700, 900]}
+          isOpen={fontWeightDropdownOpen}
+          setIsOpen={setFontWeightDropdownOpen}
+          config={{
+            title: 'Select Font Weight',
+            searchable: false,
+            windowing: false,
+            itemConfig: {
+              action: (val) => {
+                setFontWeight(val)
               }
-            </List>
-
-            {/*
-{current.map((cur, index) => (
-
-              <div key={index} className="properties__dropdown__item" onClick={(e) =>  {
-                setFontFamily(cur)
-          addFont({font: cur, weights: [400]})
-              }}>{cur}</div>
-            ))}
-
-            */}
-            
-          </div>
-        </div>
-
-
+            }
+          }}
+        />
       </div>
       
-      
 
-      <div className="properties__section" style={{ marginTop: fontFamilyDropdownOpen ? '10rem' : 'auto' }}>
+      {/* <div className="properties__section" style={{ marginTop: fontFamilyDropdownOpen ? '10rem' : 'auto' }}>
         <div className="properties__label">Font Weight</div>
         <div className="properties__dropdown-wrapper">
             <button className="properties__dropdown-trigger" onClick={() => setFontWeightDropdownOpen(true)}>{fontWeight ? fontWeight : console.log(fontWeight)}</button>
@@ -126,7 +118,7 @@ const BasicProperties = ({
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
