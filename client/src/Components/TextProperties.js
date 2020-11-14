@@ -22,7 +22,6 @@ const BasicProperties = ({
       text,
       fontWeight: fontWeight,
       fontFamily: fontFamily
-
     });
   }, [text, fontWeight, fontFamily]);
 
@@ -64,7 +63,7 @@ const BasicProperties = ({
         isOpen={fontFamilyDropdownOpen}
         setIsOpen={setFontFamilyDropdownOpen}
         config={{
-          title: 'Select Font',
+          title: fontFamily !== 'sans-serif' ? fontFamily : 'Select Font',
           searchable: true,
           windowing: true,
           searchPlaceholder: 'Search Font',
@@ -84,16 +83,17 @@ const BasicProperties = ({
       <div className="properties__section"  style={{ marginTop: fontFamilyDropdownOpen ? '13rem' : 'auto' }}>
         <div className="properties__label">Font Weight</div>
         <Dropdown
-          arr={[300, 400, 500, 700, 900]}
+          arr={[100, 300, 400, 500, 700, 900]}
           isOpen={fontWeightDropdownOpen}
           setIsOpen={setFontWeightDropdownOpen}
           config={{
-            title: 'Select Font Weight',
+          title: fontWeight ? fontWeight : 'Select Font Weight',
             searchable: false,
             windowing: false,
             itemConfig: {
               action: (val) => {
                 setFontWeight(val)
+                addFont({ font: fontFamily, weights: [val] })
               }
             }
           }}
