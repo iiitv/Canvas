@@ -28,8 +28,10 @@ const Properties = ({ selectedElement, updateElement, getElementFromId, addFont,
         cur.style.backgroundColor = '#fff';
         cur.style.borderTopLeftRadius = '5px';
         cur.style.borderTopRightRadius = '5px';
+        cur.classList.remove('properties__tab--inactive')
       } else {
         cur.style.backgroundColor = '#eee';
+        cur.classList.add('properties__tab--inactive')
       }
     });
 

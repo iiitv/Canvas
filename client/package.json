@@ -18,6 +18,7 @@
     "react-input-box-done-typing": "^2.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-shapes": "^0.1.0",
     "react-window": "^1.8.6",
     "sass": "^1.26.5",
     "sifter": "^0.5.4",

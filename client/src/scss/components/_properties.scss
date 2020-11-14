@@ -91,9 +91,22 @@
     align-items: center;
     justify-content: center;
     padding: 1rem 2rem;
+    transition: all 0.2s ease-out;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &--inactive {
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
     i {
       font-size: 2rem;
     }
+
     span {
       font-size: 1.5rem;
     }
