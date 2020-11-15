@@ -16,7 +16,7 @@ const ColorProperties = ({
 
   useEffect(() => {
     updateSelectedElement({
-      textColor: textColor.rgb
+      textColor: selectedType === 'shape' ? null : textColor.rgb
         ? `rgba(${textColor.rgb.r}, ${textColor.rgb.g}, ${textColor.rgb.b}, ${textColor.rgb.a})`
         : textColor,
       backgroundColor:
@@ -44,7 +44,9 @@ const ColorProperties = ({
         if (backgroundPicker) setBackgroundPicker(false);
       }}
     >
-      <div className="properties__section">
+      {
+        selectedType === 'shape' ? null : (
+          <div className="properties__section">
         <div className="properties__label">Text Color</div>
         <div
           className="properties__color-picker__parent"
@@ -70,6 +72,8 @@ const ColorProperties = ({
           </div>
         </div>
       </div>
+        )
+      }
       {
         selectedType === 'text' ? null : (
           <div className="properties__section">

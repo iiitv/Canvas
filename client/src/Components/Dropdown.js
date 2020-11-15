@@ -3,8 +3,9 @@ import { FixedSizeList as List } from 'react-window';
 import Sifter from 'sifter'
 import ThrottledInput from 'react-input-box-done-typing'
 
-const Dropdown = ({ arr, config, isOpen, setIsOpen }) => {
-  
+const Dropdown = ({ arr, config, isOpen, setIsOpen, curved }) => {
+
+  const shouldHaveCurves = Boolean(curved)
   const { title, searchable, windowing, itemConfig, searchPlaceholder } = config;
   const { height, width, size } = itemConfig;
   const [current, setCurrent] = useState(arr);
@@ -42,7 +43,7 @@ const Dropdown = ({ arr, config, isOpen, setIsOpen }) => {
     <div className="properties__dropdown-wrapper">
 
     {!isOpen && 
-      <button className="properties__dropdown-trigger" onClick={() => setIsOpen(true)}>{ value ? value : title }</button>}
+      <button className={`properties__dropdown-trigger ${shouldHaveCurves ? 'properties__dropdown-trigger--no-curves' : ''}`} onClick={() => setIsOpen(true)}>{ value ? value : title }</button>}
 
       <div id="properties-dropdown" className={`properties__dropdown ${isOpen ? 'properties__dropdown--open' : ''}`}>
         {searchable && (

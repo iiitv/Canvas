@@ -39,6 +39,7 @@
 
     &__content {
       transform: scaleY(0);
+      opacity: 0;
       height: 0;
       transition: all 0.2s ease-out;
       transform-origin: 50% 0;
@@ -46,6 +47,7 @@
         height: auto;
         width: 100%;
         transform: scaleY(1);
+        opacity: 1;
       }
     }
   }
@@ -70,6 +72,10 @@
 
     span {
       margin: 0 1rem;
+    }
+
+    &--disabled {
+      background-color: #fff;
     }
   }
 

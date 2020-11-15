@@ -50,27 +50,8 @@ const Sidebar = () => {
       </div>
 
       <div className="sidebar__section__content sidebar__section__content--shapes">
-      <div
-          className="sidebar__option sidebar__option--rectangle"
-          draggable="true"
-          data-type="rectangle"
-          onDragStart={dragStart}
-        >
-          <i className="fa fa-icon fa-square-o"></i>
-          <span>Drag Rectangle</span>
-        </div>
-
-        <div
-          className="sidebar__option sidebar__option--circle"
-          data-type="circle"
-          draggable="true"
-          onDragStart={dragStart}
-        >
-          <i className="fa fa-icon fa-circle-o"></i>
-          <span>Drag Circle</span>
-        </div>
+        <div className="sidebar__option sidebar__option--disabled">Shapes feature coming soon.</div>
       </div>
-
     </div>
   );
 };

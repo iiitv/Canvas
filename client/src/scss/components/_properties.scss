@@ -123,6 +123,7 @@
     text-align: center;
     border-radius: 5px;
     transition: all 0.3s ease-out;
+    height: 100%;
 
     &:hover {
       cursor: pointer;
@@ -235,4 +236,9 @@
   width: 10px;
   height: 10px;
   border-radius: 100px;
+}
+
+.properties__grid__1-by-3 {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
 }

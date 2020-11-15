@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { createButton, createText } from './../logic/ElementCreators';
+import { createButton, createText, createRectangle, createCircle } from './../logic/ElementCreators';
 
 import Sidebar from '../Components/Sidebar';
 import Properties from '../Components/Properties';
@@ -77,6 +77,50 @@ const Home = ({
     };
     createText(textConfig, textFunctions);
   };
+  const addRectangle = position => {
+    const rectConfig = {
+      text: 'Text',
+      position,
+      height: 100,
+      width: 200,
+      allowContextMenu: true,
+      backgroundColor: '#ccc',
+      resizing: false,
+      fontFamily: 'sans-serif'
+    };
+
+    const rectFunctions = {
+      setModalOpen,
+      removeElement,
+      setSelected,
+      removeSelection,
+      addElement,
+      updateElement,
+    };
+    createRectangle(rectConfig, rectFunctions);
+  };
+  const addCircle = position => {
+    const circleConfig = {
+      text: 'Text',
+      position,
+      height: 100,
+      width: 100,
+      allowContextMenu: true,
+      backgroundColor: '#ccc',
+      resizing: false,
+      fontFamily: 'sans-serif',
+    };
+
+    const circleFunctions = {
+      setModalOpen,
+      removeElement,
+      setSelected,
+      removeSelection,
+      addElement,
+      updateElement,
+    };
+    createCircle(circleConfig, circleFunctions);
+  };
 
   return (
     <div className="home">
@@ -109,6 +153,12 @@ const Home = ({
           }
           if (type === 'text') {
             addText(dropCoords);
+          }
+          if (type === 'rectangle') {
+            addRectangle(dropCoords)
+          }
+          if (type === 'circle') {
+            addCircle(dropCoords)
           }
         }}
       >

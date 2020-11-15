@@ -55,3 +55,9 @@
     background-color: #54a0ff;
   }
 }
+
+.shape {
+  &__circle {
+    border-radius: 100%;
+  }
+}

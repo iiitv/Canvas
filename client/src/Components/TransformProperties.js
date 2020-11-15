@@ -1,15 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import Dropdown from './Dropdown'
 
 const TransformProperties = ({
   updateSelectedElement,
   selectedType,
-  toggleResizing, resizing
+  toggleResizing, resizing, defaultBorderRadius
 }) => {
   
+  const normalizeBorderRadius = (val, type) => {
+    if (!val) return
+    let arr = val.split('')
+    let filtered = []
+    if (type === 'magnitude') filtered = arr.filter(cur => !isNaN(cur))
+    if (type === 'unit') filtered = arr.filter(cur => isNaN(cur))
+    let final = filtered.join('')
+    return final
+  }
+  const [borderRadius, setBorderRadius] = useState(normalizeBorderRadius(defaultBorderRadius, 'magnitude'))
+  const [borderRadiusDropdownOpen, setBorderRadiusDropdownOpen] = useState(false)
+  const [borderRadiusUnit, setBorderRadiusUnit] = useState(normalizeBorderRadius(defaultBorderRadius, 'unit'))
 
   useEffect(() => {
-    updateSelectedElement({})
-  }, [])
+    updateSelectedElement({
+      borderRadius: `${borderRadius}${borderRadiusUnit}`
+    })
+  }, [borderRadius, borderRadiusUnit])
 
   return (
     <div
@@ -22,6 +37,10 @@ const TransformProperties = ({
           Array.from(a.classList, cur => els.push(cur));
           a = a.parentNode;
         }
+        if (!els.filter(el => el === 'properties__dropdown-wrapper')[0]) {
+          setBorderRadiusDropdownOpen(false);
+          document.querySelectorAll('.properties__dropdown__searchbar > input').forEach(cur => cur.value = '');
+        }
       }}
     >
       <div className="properties__section">
@@ -31,12 +50,37 @@ const TransformProperties = ({
           <span>{resizing ? 'Stop Resizing' : 'Start Resizing'}</span>
         </button>
       </div>
-      <div className="properties__section">
+      {selectedType !== 'text' ? (
+        <div className="properties__section">
         <div className="properties__label">Border Radius</div>
-        <div className="properties__rangeinput">
-
+        <div className="properties__grid__1-by-3">
+        <input
+          className="properties__textinput"
+          type="text"
+          defaultValue={borderRadius}
+          onChange={e => setBorderRadius(e.target.value)}
+        />
+        <Dropdown
+          arr={[ 'px', '%', 'rem', 'em' ]}
+          isOpen={borderRadiusDropdownOpen}
+          setIsOpen={setBorderRadiusDropdownOpen}
+          config={{
+            title: borderRadiusUnit ? borderRadiusUnit : 'Select Unit',
+            searchable: false,
+            windowing: false,
+            itemConfig: {
+            height: 300,
+            width: 100,
+            size: 30,
+            action: (val) => {
+              setBorderRadiusUnit(val)
+            }
+          }
+          }}
+        />
         </div>
       </div>
+      ) : null}
     </div>
   );
 };

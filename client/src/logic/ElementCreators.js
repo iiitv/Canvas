@@ -5,6 +5,8 @@ import ContextMenu from './../Components/ContextMenu';
 
 import Button from './../elements/Button';
 import Text from './../elements/Text';
+import Rectangle from './../elements/Rectangle'
+import Circle from './../elements/Circle'
 
 const triggerContextMenu = (
   e,
@@ -165,4 +167,115 @@ export const createText = (config, functions) => {
     id,
   };
   addElement(btn);
+};
+
+export const createRectangle = (config, functions) => {
+  const id = uniqid();
+  const {
+    text,
+    position,
+    height,
+    width,
+    allowContextMenu,
+    textColor,
+    backgroundColor,
+    fontWeight,
+    resizing,
+    fontFamily
+
+  } = config;
+
+  const {
+    setModalOpen,
+    removeElement,
+    setSelected,
+    removeSelection,
+    addElement,
+  } = functions;
+
+  const showContextMenu = e =>
+    triggerContextMenu(
+      e,
+      id,
+      allowContextMenu,
+      setSelected,
+      removeElement,
+      removeSelection,
+      setModalOpen
+    );
+
+  const rect = {
+    element: (
+      <Rectangle
+        id={id}
+        position={position}
+        height={height}
+        width={width}
+        setSelected={setSelected}
+        showContextMenu={showContextMenu}
+        backgroundColor={backgroundColor}
+        type="shape"
+        resizing={resizing}
+        fontFamily={fontFamily}
+      />
+    ),
+    id,
+  };
+  addElement(rect);
+};
+
+
+export const createCircle = (config, functions) => {
+  const id = uniqid();
+  const {
+    text,
+    position,
+    height,
+    width,
+    allowContextMenu,
+    textColor,
+    backgroundColor,
+    fontWeight,
+    resizing,
+    fontFamily
+
+  } = config;
+
+  const {
+    setModalOpen,
+    removeElement,
+    setSelected,
+    removeSelection,
+    addElement,
+  } = functions;
+
+  const showContextMenu = e =>
+    triggerContextMenu(
+      e,
+      id,
+      allowContextMenu,
+      setSelected,
+      removeElement,
+      removeSelection,
+      setModalOpen
+    );
+
+  const circle = {
+    element: (
+      <Circle
+        id={id}
+        position={position}
+        height={height}
+        width={width}
+        setSelected={setSelected}
+        showContextMenu={showContextMenu}
+        backgroundColor={backgroundColor}
+        type="shape"
+        resizing={resizing}
+        fontFamily={fontFamily}
+      />
+    ),
+    id,
+  };
+  addElement(circle);
 };
