@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, cloneElement } from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
+import GoogleFontLoader from 'react-google-font-loader'
+import axios from 'axios';
 import Home from './Home';
 import '../scss/main.scss';
 
@@ -10,6 +12,9 @@ export class App extends Component {
       elements: [],
       modalOpen: false,
       selected: null,
+      fonts:[
+        
+      ],
     };
   }
 
@@ -36,6 +41,29 @@ export class App extends Component {
       elements: newArray,
     });
   };
+
+  updateAll = (values = {}) => {
+
+    let newArray = this.state.elements;
+    let updatedArray = [];
+    newArray.forEach((obj) => {
+      if (values && values !== {}) {
+        let updatedElement = cloneElement(obj.element, {
+          ...obj.element.props,
+          ...values,
+        });
+        let updatedObj = { id: obj.id, element: updatedElement}
+        updatedArray.push(updatedObj)
+        console.log(newArray)
+        console.log(updatedArray)
+      }
+    })
+
+
+    this.setState({
+      elements: updatedArray
+    })
+  }
 
   setSelected = id => {
     let tempArr = this.state.elements;
@@ -84,9 +112,33 @@ export class App extends Component {
     return active;
   };
 
+  
+
+  addFont = (fontObject = null) => {
+    if (fontObject) {
+      this.setState({
+        fonts: [...this.state.fonts, fontObject]
+      })
+    }
+  }
+
+  fontsList = []
+
+  getFontsList = async () => {
+    let url = 'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyAOUuDEvb_rK--gRqD09Vgx-1P507UX-QI&sort=alpha'
+    let res = await axios.get(url)
+    let fontsList = res.data.items.map(item => {
+      return item.family
+    })
+    this.fontsList = fontsList;
+  }
+
   render() {
+    
+    this.getFontsList()
     return (
       <BrowserRouter>
+        <GoogleFontLoader fonts={this.state.fonts} />
         <Route
           to="/"
           render={() => (
@@ -100,6 +152,9 @@ export class App extends Component {
               removeSelection={this.removeSelection}
               updateElement={this.updateElement}
               getElementFromId={this.getElementFromId}
+              updateAll={this.updateAll}
+              addFont={this.addFont}
+              fontsList={this.fontsList}
             />
           )}
         />

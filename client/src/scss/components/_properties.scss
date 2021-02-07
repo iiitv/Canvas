@@ -10,6 +10,14 @@
   animation: bounceIn 0.3s ease-out;
   border-radius: 10px;
 
+  &__content {
+    height: calc(100% - 5rem);
+  }
+
+  &__container {
+    height: 100%;
+  }
+
   &__title {
     font-size: 2.5rem;
     padding: 1rem 2rem;
@@ -83,9 +91,22 @@
     align-items: center;
     justify-content: center;
     padding: 1rem 2rem;
+    transition: all 0.2s ease-out;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &--inactive {
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
     i {
       font-size: 2rem;
     }
+
     span {
       font-size: 1.5rem;
     }
@@ -94,4 +115,130 @@
   &__rangeinput {
     width: 100%;
   }
+
+  &__dropdown-trigger {
+    background-color: #eee;
+    font-size: 1.6rem;
+    padding: 1rem 2rem;
+    text-align: center;
+    border-radius: 5px;
+    transition: all 0.3s ease-out;
+    height: 100%;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:active {
+      background-color: #ccc;
+      transform: scale(0.95);
+    }
+  }
+
+  &__dropdown-wrapper {
+    position: relative;
+    top: 0;
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    min-width: 10rem;
+    max-height: 15rem;
+    overflow-y: scroll;
+    transition: all 0.2s ease-out;
+    transform: scale(0);
+    transform-origin: 0 0;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1),
+      0 -0.5rem 1rem rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+
+    &__item {
+      padding: 0.6rem 2rem;
+      font-size: 1.6rem;
+
+      &:hover {
+        background-color: #ccc;
+        cursor: pointer;
+      }
+
+      &--disabled {
+        &:hover {
+          background-color: #fff;
+          cursor: auto;
+        }
+        color: #555;
+      }
+    }
+
+    &--open {
+      transform: scale(1);
+    }
+
+    &__searchbar {
+      padding: 1rem 2rem;
+      width: 100%;
+      height: 100%;
+
+      input {
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: #555;
+      }
+
+      &__divider {
+        background-color: #ccc;
+        width: 90%;
+        border-radius: 100px;
+        height: 2px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  &__btn {
+    background-color: #eee;
+    font-size: 1.6rem;
+    padding: 1rem 2rem;
+    transition: all 0.3s ease-out;
+
+    &:hover {
+      cursor: pointer;
+    }
+    &:active {
+      background-color: #ccc;
+      transform: scale(0.95);
+    }
+    &__logo {
+      margin: 0 0.5rem;
+    }
+  }
+
+  &__resize-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &--active {
+      background-color: #ccc;
+    }
+  }
+}
+
+#properties-dropdown::-webkit-scrollbar {
+  display: none;
+}
+
+.circle-icon {
+  background-color: red;
+  width: 10px;
+  height: 10px;
+  border-radius: 100px;
+}
+
+.properties__grid__1-by-3 {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
 }

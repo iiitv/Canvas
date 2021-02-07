@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { createButton, createText } from './../logic/ElementCreators';
+import React, { Fragment, useEffect } from 'react';
+import { createButton, createText, createRectangle, createCircle } from './../logic/ElementCreators';
 
 import Sidebar from '../Components/Sidebar';
 import Properties from '../Components/Properties';
@@ -14,7 +14,20 @@ const Home = ({
   updateElement,
   removeSelection,
   getElementFromId,
+  updateAll,
+  addFont,
+  fontsList
 }) => {
+
+
+  useEffect(() => {
+    if (!selected) {
+      updateAll({
+        resizing: false
+      })
+    }
+  }, [selected])
+  
   const addButton = position => {
     const buttonConfig = {
       text: 'Button',
@@ -25,6 +38,9 @@ const Home = ({
       backgroundColor: '#ccc',
       textColor: '#000',
       borderRadius: '5px',
+      fontWeight: 400,
+      resizing: false,
+      fontFamily: 'sans-serif'
     };
 
     const buttonFunctions = {
@@ -46,6 +62,9 @@ const Home = ({
       allowContextMenu: true,
       backgroundColor: 'transparent',
       textColor: '#000',
+      fontWeight: 400,
+      resizing: false,
+      fontFamily: 'sans-serif'
     };
 
     const textFunctions = {
@@ -58,6 +77,50 @@ const Home = ({
     };
     createText(textConfig, textFunctions);
   };
+  const addRectangle = position => {
+    const rectConfig = {
+      text: 'Text',
+      position,
+      height: 100,
+      width: 200,
+      allowContextMenu: true,
+      backgroundColor: '#ccc',
+      resizing: false,
+      fontFamily: 'sans-serif'
+    };
+
+    const rectFunctions = {
+      setModalOpen,
+      removeElement,
+      setSelected,
+      removeSelection,
+      addElement,
+      updateElement,
+    };
+    createRectangle(rectConfig, rectFunctions);
+  };
+  const addCircle = position => {
+    const circleConfig = {
+      text: 'Text',
+      position,
+      height: 100,
+      width: 100,
+      allowContextMenu: true,
+      backgroundColor: '#ccc',
+      resizing: false,
+      fontFamily: 'sans-serif',
+    };
+
+    const circleFunctions = {
+      setModalOpen,
+      removeElement,
+      setSelected,
+      removeSelection,
+      addElement,
+      updateElement,
+    };
+    createCircle(circleConfig, circleFunctions);
+  };
 
   return (
     <div className="home">
@@ -67,6 +130,9 @@ const Home = ({
           updateElement={updateElement}
           selectedElement={selected}
           getElementFromId={getElementFromId}
+          addFont={addFont}
+          fontsList={fontsList}
+          updateAll={updateAll}
         />
       ) : null}
       <div
@@ -87,6 +153,12 @@ const Home = ({
           }
           if (type === 'text') {
             addText(dropCoords);
+          }
+          if (type === 'rectangle') {
+            addRectangle(dropCoords)
+          }
+          if (type === 'circle') {
+            addCircle(dropCoords)
           }
         }}
       >

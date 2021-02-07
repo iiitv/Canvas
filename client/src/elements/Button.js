@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import addResizeEvent from 'element-resize-event';
-import { throttle } from 'lodash';
+import {Resizable} from 're-resizable'
+import resizeHandles from './../Components/ResizeHandles'
 
 const Button = ({
   text,
@@ -9,10 +9,13 @@ const Button = ({
   width,
   id,
   setSelected,
+  resizing,
   showContextMenu,
   backgroundColor,
   textColor,
   borderRadius,
+  fontWeight,
+  fontFamily
 }) => {
   const [styles, setStyles] = useState({
     position: 'absolute',
@@ -20,12 +23,21 @@ const Button = ({
     height,
     top: `calc(${position.y}px)`,
     left: `calc(${position.x}px - 30rem)`,
-    minWidth: '4rem',
-    maxWidth: '100rem',
     borderRadius,
+    fontWeight,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+
+
   });
 
+  useEffect(() => {
+    console.log(resizing);
+  }, [resizing])
+
   const setCoordinates = e => {
+    if (resizing) return;
     let width = e.target.clientWidth;
     let height = e.target.clientHeight;
     let x = e.clientX,
@@ -38,19 +50,47 @@ const Button = ({
   };
 
   return (
-    <button
+    <Resizable defaultSize={{
+      width,
+      height
+    }} style={{ ...styles, backgroundColor, color: textColor, borderRadius, fontFamily, fontWeight}}
+    className="btn"
+    id={`btn-${id}`}
+    draggable={!resizing}
+    enable={{
+      top:resizing, right:resizing, bottom:resizing, left:resizing, topRight:resizing, bottomRight:resizing, bottomLeft:resizing, topLeft:resizing
+    }}
+    onDoubleClick={() =>
+      setSelected(id)
+    }
+    onContextMenu={showContextMenu}
+    onDrag={(e) => {
+      if (resizing) return;
+      setCoordinates(e)
+    }}
+    onDragStart={e => {
+      if (resizing) return;
+      e.dataTransfer.setDragImage(new Image(), 0, 0)
+    }}
+    handleComponent={resizeHandles}
+    >
+    {text}
+    </Resizable>
+  );
+};
+
+export default Button;
+
+/*
+<button
       style={{ ...styles, backgroundColor, color: textColor, borderRadius }}
       className="btn"
       draggable="true"
       onDrag={setCoordinates}
       onDragStart={e => e.dataTransfer.setDragImage(new Image(), 0, 0)}
-      onContextMenu={showContextMenu}
       onDoubleClick={() => setSelected(id)}
       id={`btn-${id}`}
     >
       {text}
     </button>
-  );
-};
-
-export default Button;
+*/
